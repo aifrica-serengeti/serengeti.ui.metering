@@ -1,0 +1,32 @@
+{
+  "common": {
+    "theme": {
+      "title": "테마 설정"
+    }
+  },
+  "metering": {
+    "list": {
+      "cloud": {
+        "ownerId": "관리자",
+        "type": "클라우드",
+        "name": "클라우드 이름"
+      },
+      "metering": {
+        "cpu": "cpu",
+        "gpu": "gpu",
+        "memory": "memory"
+      }
+    },
+    "detail": {
+      "table": {
+        "title": {
+          "name": "자원 이름",
+          "type": "자원 타입",
+          "size": "자원 사이즈",
+          "status": "자원 상태",
+          "price": "금액 설정"
+        }
+      }
+    }
+  }
+}

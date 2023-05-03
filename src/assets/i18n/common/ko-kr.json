@@ -1,0 +1,172 @@
+{
+	"common": {
+		"theme": {
+			"title": "테마 설정",
+			"options": {
+				"light": "밝은 테마",
+				"dark": "어두운 테마"
+			}
+		},
+		"image": {
+			"invalid-format": "잘못된 이미지 형식입니다.\n이미지 형태의 파일을 선택해 주시기 바랍니다."
+		},
+        "locale": {
+            "ko-kr": "한국어",
+            "en-us": "영어",
+            "ja-jp": "일본어",
+            "zh-cn": "중국어"
+		},
+		"api-name": {
+			"title": "API 이름",
+			"options": {
+				"apiApplication": "어플리케이션 관리 API",
+				"apiApplicationExecution": "어플리케이션 실행 API",
+				"apiBilling": "빌링 API",
+				"apiLogin": "로그인 API",
+				"apiMail": "메일 발송 API",
+				"apiMonitoring": "모니터링 API",
+				"apiNotification": "알람 관리 API",
+				"apiResource": "리소스 정보 관리 API",
+				"apiResourceTask": "리소스 테스크 관리 API",
+				"apiResourceTemplate": "리소스 템플릿 관리 API",
+				"apiResourceManager": "리소스 실행 관리 API",
+				"apiScheduler": "스케줄 관리 API",
+				"apiUser": "사용자 정보 관리 API"
+			}
+		},
+		"active-state" : {
+			"title": "활성 상태",
+			"options": {
+				"Active": "활성",
+				"Inactive": "비활성"
+			}
+		},
+		"api-method" : {
+			"title": "호출 방법",
+			"options": {
+				"POST": "POST",
+				"PUT": "PUT",
+				"PATCH": "PATCH",
+				"DELETE": "DELETE",
+				"GET": "GET",
+				"PAGE": "PAGE"
+			}
+		},
+		"access-role" : {
+			"title": "사용자 권한",
+			"options": {
+				"Root": "시스템 관리자",
+				"UserAdmin": "그룹 관리자",
+				"UserGeneral": "그룹 사용자",
+				"Developer": "일반 사용자"
+			}
+		},
+		"variable-type": {
+			"title": "변수 타입",
+			"options": {
+				"String": "문자열",
+				"Integer": "숫자",
+				"Double": "부동소수",
+				"Boolean": "논리",
+				"Custom": "사용자 정의"
+			}
+		},
+		"button": {
+			"search": "검색",
+			"select": "선택",
+			"ok": "확인",
+			"save": "저장하기",
+			"close": "닫기",
+			"cancel": "취소"
+		},
+		"state": {
+			"yes": "예",
+			"no": "아니오",
+			"true": "예",
+			"false": "아니오"
+		},
+		"boolean": {
+			"true": "참",
+			"false": "거짓"
+		},
+		"invalid": {
+			"empty": "필수 값이 누락되었습니다.",
+			"format": "잘못된 형식의 값이 입력되었습니다.",
+			"min-range": "입력값이 최소값 이하입니다.",
+			"max-range": "입력값이 최대값 이상입니다.",
+			"min-length": "입력값이 최소 길이 이하입니다.",
+			"max-length": "입력값이 최대 길이 이상입니다.",
+			"range": "범위 값의 끝값이 시작값보다 작습니다.",
+			"missing-array-element": "입력 항목이 존재하지 않습니다.",
+			"min-array-element": "최소 입력 항목 갯수보다 적게 입력이 되었습니다.",
+			"max-array-element": "최대 입력 항목 갯수보다 많이 입력이 되었습니다.",
+			"unique-value": "중복된 값이 입력되었으니 확인해 주시기 바랍니다.",
+			"access-user": "가입된 회원에게만 제공하는 정보입니다.\n회원 가입 후, 로그인을 통해서 이용해 주시기 바랍니다.",
+			"access-menu": "접근 권한이 없는 기능에 접근할려고 합니다.\n권한 및 공유 여부를 확인해 주세요",
+			"access-app": "접근 권한이 없는 소프트웨어 정보에 접근할려고 합니다.\n권한 및 공유 여부를 확인해 주세요",
+			"access-resource": "접근 권한이 없는 자원 정보에 접근할려고 합니다.\n권한 및 공유 여부를 확인해 주세요",
+			"access-service": "접근 권한이 없는 서비스 정보에 접근할려고 합니다.\n권한 및 공유 여부를 확인해 주세요",
+			"alert": "잘못된 입력값이 있습니다.\n입력 필드를 확인해 주세요."
+		},
+		"billing": {
+			"unit": {
+				"USD": "달러(미국)",
+				"WON": "원",
+				"YEN": "엔",
+				"CNY": "위안",
+				"NA": "없음"
+			}
+        },
+        "dialog": {
+            "select-pool": {
+                "title": "클라우드 접속 정보 선택",
+                "content": {
+                    "columns": {
+                        "select": "선택",
+                        "cloud": "클라우드 정보",
+                        "region": "클라우드 서비스 지역",
+                        "name": "클라우드 접속 이름"
+                    }
+                }
+            },
+			"select-dialog": {
+				"content": {
+					"search": "검색"
+				},
+				"alert": {
+					"no-item-selected": "선택된 항목이 없습니다.\n항목을 선택해 주시기 바랍니다.",
+					"no-tenant-selected": "선택된 테넌트가 없습니다.\n적용하고자 하는 테넌트를 선택해 주시기 바랍니다."
+				}
+			}
+        },
+		"content": {
+			"no-value": "없음"
+		},
+		"table": {
+			"paginator": {
+				"title": "페이지별 건수"
+			}
+		},
+		"copyright": {
+			"title": "서비스의 지적 재산권은 (주)에이프리카의 자산으로 국내/국제법에 의해 보호됩니다.",
+			"address": "서울특별시 금천구 가산디지털1로 233 에이스하이엔드타워 9차 1310호",
+			"contact": {
+				"fax": "팩스 : +82-0505-991-7799",
+				"email": "연락처 : serengeti-admin@aifrica.co.kr",
+				"tel": "전화  "
+			}
+		},
+		"terms": {
+			"title": "서비스 이용 약관"
+		},
+		"sla": {
+			"title": "오토스케일 서비스 제공 방침"
+		},
+		"upload-status": {
+			"title": "파일 업로드 상태",
+			"button": {
+				"close": "닫기"
+			}
+		}
+	}
+}

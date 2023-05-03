@@ -1,0 +1,155 @@
+{
+    "common": {
+		"image": {
+			"invalid-format": "無効なイメージ形式です。\n画像形式のファイルを選択してください。"
+		},
+        "locale": {
+            "ko-kr": "韓国語",
+            "en-us": "英語",
+            "ja-jp": "日本人",
+            "zh-cn": "中国語"
+        },
+		"api-name": {
+			"title": "API名",
+			"options": {
+				"apiApplication": "アプリケーション管理API",
+				"apiApplicationExecution": "アプリケーション実行API",
+				"apiBilling": "請求API",
+				"apiLogin": "ログインAPI",
+				"apiMail": "メールAPI",
+				"apiMonitoring": "モニタリングAPI",
+				"apiNotification": "通知API",
+				"apiResource": "リソース管理API",
+				"apiResourceTask": "リソースタスクAPI",
+				"apiResourceTemplate": "リソーステンプレートAPI",
+				"apiResourceManager": "リソース実行API",
+				"apiScheduler": "スケジュールAPI",
+				"apiUser": "ユーザーAPI"
+			}
+		},
+		"active-state" : {
+			"title": "アクティブ状態",
+			"options": {
+				"Active": "アクティブ",
+				"Inactive": "非活性"
+			}
+		},
+		"api-method" : {
+			"title": "RESTfulAPIメソッド",
+			"options": {
+				"POST": "役職",
+				"PUT": "プット",
+				"PATCH": "パッチ",
+				"DELETE": "削除",
+				"GET": "取得する",
+				"PAGE": "ページ"
+			}
+		},
+		"access-role" : {
+			"title": "ユーザーロール",
+			"options": {
+				"Root": "システム管理者",
+				"UserAdmin": "ユーザーグループ管理者",
+				"UserGeneral": "ユーザーグループメンバー",
+				"Developer": "一般ユーザー"
+			}
+		},
+		"variable-type": {
+			"title": "変数タイプ",
+			"options": {
+				"String": "ストリング",
+				"Integer": "整数",
+				"Double": "ダブル",
+				"Boolean": "ブール値",
+				"Custom": "ユーザー定義の"
+			}
+		},
+        "button": {
+            "search": "探す",
+            "select": "選択する",
+            "ok": "OK",
+            "save": "セーブ",
+			"close": "閉じる",
+			"cancel": "キャンセル"
+        },
+        "state": {
+            "yes": "はい",
+			"no": "番号",
+			"true": "はい",
+			"false": "本当"
+        },
+		"boolean": {
+			"true": "本当",
+			"false": "誤り"
+		},
+		"invalid": {
+			"empty": "必須フィールド値が欠落しています",
+			"format": "不正な形式の値がフィールドに入力されます",
+			"min-range": "入力値が必要な最小値を下回っています",
+			"max-range": "入力値が必要な最大値を超えています",
+			"min-length": "入力文字列の長さが必要な長さよりも短い",
+			"max-length": "入力文字列の長さが必要以上です",
+			"range": "範囲値の終了値が開始値よりも小さい",
+			"missing-array-element": "エントリが存在しません",
+			"min-array-element": "エントリの最小数未満が入力されました",
+			"max-array-element": "入力項目の最大数を超えて入力されました",
+			"unique-value": "重複した値が入力したのでご確認ください.",
+			"access-user": "登録された会員のみに提供される情報です。\n会員登録後、ログインを介してご利用下さい。 ",
+			"access-menu": "アクセス権がない機能にアクセスしようとします。\n権と共有するかどうかを確認してください ",
+			"access-app": "アクセス権がないソフトウェア情報にアクセスしようとします。\n権と共有するかどうかを確認してください ",
+			"access-resource": "アクセス権がないリソース情報にアクセスしようとします。\n権と共有するかどうかを確認してください ",
+			"access-service": "アクセス権がないサービスの情報にアクセスしようとします。\n権と共有するかどうかを確認してください ",
+			"alert": "フォームフィールドにエラーがあります。\n入力フィールドを確認してください。"
+		},
+        "billing": {
+            "unit": {
+                "USD": "米ドル",
+                "WON": "勝った",
+                "YEN": "円",
+                "CNY": "人民元",
+                "NA": "該当なし"
+            }
+        },
+        "dialog": {
+            "select-pool": {
+                "title": "クラウドプールを選択",
+                "content": {
+                    "columns": {
+                        "select": "選択する",
+                        "cloud": "雲",
+                        "region": "領域",
+                        "name": "名前"
+                    }
+                }
+            },
+			"select-dialog": {
+				"alert": {
+					"no-item-selected": "選択された項目がありません。\n項目を選択してください。"
+				}
+            }
+        },
+        "content": {
+            "no-value": "該当なし"
+        },
+        "table": {
+            "paginator": {
+                "title": "1ページあたりのアイテム"
+            }
+        },
+        "copyright": {
+            "title": "サービスの知的財産権は、（株）エイプリカの資産で国内/国際法によって保護されます。",
+            "address": "＃1310エースハイエンドタワー9、233、Gasan digital 1-ro、衿川区、ソウル、韓国",
+            "contact": {
+                "fax": "ファックス：+ 82-0505-991-7799",
+                "email": "連絡先： serengeti-admin@aifrica.co.kr",
+                "tel": "電話 "
+            }
+		},
+		"terms": {
+			"title": "サービス利用規約"
+		},
+		"sla": {
+			"title": "オートスケールサービス提供の方針"
+       }
+    }
+}

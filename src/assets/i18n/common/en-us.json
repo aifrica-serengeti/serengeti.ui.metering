@@ -1,0 +1,157 @@
+{
+	"lib": {
+		"common": {
+			"image": {
+				"invalid-format": "Incorrect image format.\nPlease select an image format file."
+			},
+			"locale": {
+				"ko-kr": "Korean",
+				"en-us": "English",
+				"ja-jp": "Japanese",
+				"zh-cn": "Chinese"
+			},
+			"api-name": {
+				"title": "API Name",
+				"options": {
+					"apiApplication": "Application Management API",
+					"apiApplicationExecution": "Application Execution API",
+					"apiBilling": "Billing API",
+					"apiLogin": "Login API",
+					"apiMail": "Mail API",
+					"apiMonitoring": "Monitoring API",
+					"apiNotification": "Notification API",
+					"apiResource": "Resource Management API",
+					"apiResourceTask": "Resource Task API",
+					"apiResourceTemplate": "Resource Template API",
+					"apiResourceManager": "Resource Execution API",
+					"apiScheduler": "Schedule API",
+					"apiUser": "User API"
+				}
+			},
+			"active-state" : {
+				"title": "Active State",
+				"options": {
+					"Active": "Active",
+					"Inactive": "Inactive"
+				}
+			},
+			"api-method" : {
+				"title": "RESTful API Method",
+				"options": {
+					"POST": "POST",
+					"PUT": "PUT",
+					"PATCH": "PATCH",
+					"DELETE": "DELETE",
+					"GET": "GET",
+					"PAGE": "PAGE"
+				}
+			},
+			"access-role" : {
+				"title": "User Role",
+				"options": {
+					"Root": "System Administrator",
+					"UserAdmin": "User Group Administrator",
+					"UserGeneral": "User Group Member",
+					"Developer": "General User"
+				}
+			},
+			"variable-type": {
+				"title": "Variable Type",
+				"options": {
+					"String": "String",
+					"Integer": "Integer",
+					"Double": "Double",
+					"Boolean": "Boolean",
+					"Custom": "User Defined"
+				}
+			},
+			"button": {
+				"search": "Search",
+				"select": "Select",
+				"ok": "Ok",
+				"save": "Save",
+				"close": "Close",
+				"cancel": "Cancel"
+			},
+			"state": {
+				"yes": "Yes",
+				"no": "No",
+				"true": "Yes",
+				"false": "True"
+			},
+			"boolean": {
+				"true": "True",
+				"false": "False"
+			},
+			"invalid": {
+				"empty": "The mandatory field value is missed",
+				"format": "The mal-formed value is filled in the field",
+				"min-range": "The input value is under the minimum requried",
+				"max-range": "The input value is over the maximum required",
+				"min-length": "The length of the input string is less than the required",
+				"max-length": "The length of the input string is more than the required",
+				"range": "The end value of the range value is less than the start value",
+				"missing-array-element": "The entry does not exist",
+				"min-array-element": "Less than the minimum number of entries has been entered",
+				"max-array-element": "More than the maximum number of input items has been entered",
+				"unique-value": "A duplicate value has been entered, so please check it.",
+				"access-user": "This information is provided only to registered members.\nAfter registering as a member, please use it through login.",
+				"access-menu": "You are trying to access a function that you do not have access rights to.\nPlease check the permission and sharing status",
+				"access-app": "You are trying to access software information for which you do not have access rights.\nPlease check your permission and sharing status",
+				"access-resource": "You are trying to access information on a resource you do not have access rights to.\nPlease check your permission and sharing status",
+				"access-service": "You are trying to access service information for which you do not have access rights.\nPlease check the permission and sharing status",
+				"alert": "There is an error in your form field.\nPlease check your input fields."
+			},
+			"billing": {
+				"unit": {
+					"USD": "USD",
+					"WON": "WON",
+					"YEN": "YEN",
+					"CNY": "CNY",
+					"NA": "N/A"
+				}
+			},
+			"dialog": {
+				"select-pool": {
+					"title": "Select Cloud Pool",
+					"content": {
+						"columns": {
+							"select": "Select",
+							"cloud": "Cloud",
+							"region": "Region",
+							"name": "Name"
+						}
+					}
+				},
+				"select-dialog": {
+					"alert": {
+						"no-item-selected": "There is no selected item.\nPlease select an item."
+					}
+				}
+			},
+			"content": {
+				"no-value": "N/A"
+			},
+			"table": {
+				"paginator": {
+					"title": "Items per page"
+				}
+			},
+			"copyright": {
+				"title": "Copyright © Aifrica Co. Ltd. All Rights Reserved.",
+				"address": "#1310 Ace High-end Tower 9, 233, Gasan digital 1-ro, Geumcheon-gu, Seoul, Korea",
+				"contact": {
+					"fax": "Fax : +82-0505-991-7799",
+					"email": "Contact : serengeti-admin@aifrica.co.kr",
+					"tel": "Tel  "
+				}
+			},
+			"terms": {
+				"title": "Terms of Service"
+			},
+			"sla": {
+				"title": "Autoscale Service Provision Policy"
+			}
+		}	
+	}
+}

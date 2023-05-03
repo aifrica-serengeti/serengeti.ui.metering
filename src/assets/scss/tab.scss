@@ -1,0 +1,66 @@
+.mat-tab-group {
+	::ng-deep .mat-tab-body-wrapper {
+		margin: 15px;
+		height: calc(100% - 40px);
+	
+		.mat-tab-body.mat-tab-body-active {
+			overflow-y: inherit;
+		}
+		
+		.mat-tab-body-content {
+			width: 100%;
+			overflow: inherit;
+			padding-top: 0px;
+			padding-bottom: 0px;
+			padding-left: 0px;
+			padding-right: 0px;
+		}	
+	}	
+	.mat-tab-label-active {
+		/* border-top: 1px solid rgba(0,0,0,.12) !important;
+		border-left: 1px solid rgba(0,0,0,.12) !important;
+		border-right: 1px solid rgba(0,0,0,.12) !important;
+		background-color: lightgray; */
+		opacity: 1 !important;
+	}
+
+	::ng-deep .mat-tab-label {
+		font-size: 1rem;
+		
+		mat-icon {
+			margin-right: 8px;
+		}
+	}
+
+	.mat-tab-label-content {
+		font-size: 1rem;
+		font-weight: normal;
+	}
+
+	.mat-tab-label-content {
+		.tab-icon, mat-icon {
+			margin-right: 8px;
+			vertical-align: middle;	
+		}
+		.tab-icon.rotate45 {
+			transform: rotate(45deg);
+		}
+		
+		.tab-icon.rotate90 {
+			transform: rotate(90deg);
+		}
+		
+		.tab-icon.rotate180 {
+			transform: rotate(180deg);
+		}
+		
+		.tab-icon.rotate270 {
+			transform: rotate(270deg);
+		}	
+	}
+}
+
+
+.cdk-overlay-pane .mat-dialog-container {
+	overflow: inherit;
+}

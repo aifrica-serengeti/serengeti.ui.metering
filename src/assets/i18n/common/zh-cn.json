@@ -1,0 +1,155 @@
+{
+    "common" : {
+		"image": {
+			"invalid-format": "图片格式不正确。\n请选择图片格式文件。"
+		},
+        "locale" : {
+            "ko-kr" : "韩文",
+            "en-us" : "英语",
+            "ja-jp" : "日语",
+            "zh-cn" : "中文"
+        },
+		"api-name" : {
+			"title" : "API名称",
+			"options" : {
+				"apiApplication" : "应用程序管理API",
+				"apiApplicationExecution" : "应用程序执行API",
+				"apiBilling" : "Billing API",
+				"apiLogin" : "登录API",
+				"apiMail" : "邮件API",
+				"apiMonitoring" : "Monitoring API",
+				"apiNotification" : "Notification API",
+				"apiResource" : "资源管理API",
+				"apiResourceTask" : "资源任务API",
+				"apiResourceTemplate" : "资源模板API",
+				"apiResourceManager" : "资源执行API",
+				"apiScheduler" : "时间表API",
+				"apiUser" : "用户API"
+			}
+		},
+		"active-state" : {
+			"title" : "活动状态",
+			"options" : {
+				"Active" : "活性",
+				"Inactive" : "不活跃"
+			}
+		},
+		"api-method" : {
+			"title" : "RESTful API方法",
+			"options" : {
+				"POST" : "开机自检",
+				"PUT" : "放",
+				"PATCH" : "补丁",
+				"DELETE" : "删除",
+				"GET" : "得到",
+				"PAGE" : "页"
+			}
+		},
+		"access-role" : {
+			"title" : "用户角色",
+			"options" : {
+				"Root" : "系统管理员",
+				"UserAdmin" : "用户组管理员",
+				"UserGeneral" : "用户组成员",
+				"Developer" : "普通用户"
+			}
+		},
+		"variable-type" : {
+			"title" : "变量类型",
+			"options" : {
+				"String" : "串",
+				"Integer" : "整数",
+				"Double" : "双",
+				"Boolean" : "布尔型",
+				"Custom" : "用户定义"
+			}
+		},
+        "button" : {
+            "search" : "搜索",
+            "select" : "选择",
+            "ok" : "行",
+            "save" : "保存",
+			"close" : "关",
+			"cancel" : "取消"
+        },
+        "state" : {
+            "yes" : "是",
+			"no" : "不",
+			"true" : "是",
+			"false" : "假"
+        },
+		"boolean" : {
+			"true" : "真正",
+			"false" : "假"
+		},
+		"invalid" : {
+			"empty" : "缺少必填字段值",
+			"format" : "格式错误的值填写在该字段中",
+			"min-range" : "输入值低于要求的最小值",
+			"max-range" : "输入值超过要求的最大值",
+			"min-length" : "输入字符串的长度小于要求的长度",
+			"max-length" : "输入字符串的长度大于要求的长度",
+			"range" : "范围值的结束值小于起始值",
+			"missing-array-element" : "该条目不存在",
+			"min-array-element" : "少于已输入的最小条目数",
+			"max-array-element" : "输入的输入项超过最大数量",
+			"unique-value": "输入了重复的值,因此请检查它.",
+			"access-user": "该信息仅提供给注册会员。\n注册为会员后,请通过登录使用。",
+			"access-menu": "您正在尝试访问您没有访问权限的功能。\n请检查权限和共享状态",
+			"access-app": "您正在尝试访问没有访问权限的软件信息。\n请检查您的许可和共享状态",
+			"access-resource": "您正在尝试访问没有访问权限的资源上的信息。\n请检查您的许可和共享状态",
+			"access-service": "您正在尝试访问没有访问权限的服务信息。\n请检查许可和共享状态",
+			"alert" : "您的表单字段中有错误. /n请检查您的输入字段."
+		},
+        "billing" : {
+            "unit" : {
+                "USD" : "美元",
+                "WON" : "韩元",
+                "YEN" : "日元",
+                "CNY" : "中国新年",
+                "NA" : "不适用"
+            }
+        },
+        "dialog" : {
+            "select-pool" : {
+                "title" : "选择云池",
+                "content" : {
+                    "columns" : {
+                        "select" : "选择",
+                        "cloud" : "云",
+                        "region" : "地区",
+                        "name" : "名称"
+                    }
+                }
+            },
+			"select-dialog": {
+				"alert": {
+					"no-item-selected": "没有选定的项目.\n请选择一个项目."
+				}
+            }
+        },
+        "content" : {
+            "no-value" : "不适用"
+        },
+        "table" : {
+            "paginator" : {
+                "title" : "每页项目"
+            }
+        },
+        "copyright" : {
+            "title" : "本服务的知识产权为Aifrica Co., Ltd. 的财产，受国内/国际法律保护。",
+            "address" : "#1310 首尔市锦川区迦山数字1-路233号Ace高端塔9",
+            "contact" : {
+                "fax" : "传真 : +82-0505-991-7799",
+                "email" : "联系 : serengeti-admin@aifrica.co.kr",
+                "tel" : "电话号码 "
+            }
+		},
+		"terms": {
+			"title": "服务条款"
+		},
+		"sla": {
+			"title": "自动缩放服务提供策略"
+        }
+    }
+}

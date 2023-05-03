@@ -1,0 +1,115 @@
+@import 'src/assets/scss/theme.scss';
+
+.mat-card {
+	display: inline-block;
+	flex-direction: column;
+	width: 330px;
+	height: 410px;
+	max-height: 410px;
+	vertical-align: top;
+	border: 1px solid;
+
+	background: inherit;
+	margin: 10px;
+
+	::ng-deep .mat-card-header {
+		width: 100%;
+		text-align: left;
+
+		.mat-card-header-text {
+			width: calc(100% - 40px);
+
+			.mat-card-title {
+				padding-top: 3px;
+				margin-bottom: 5px;
+
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				width: 100%;
+				padding-bottom: 8px;
+			}
+			.mat-card-subtitle {
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				width: 100%;
+				color: inherit;
+			}
+
+			.mat-card-subtitle:not(first-child) {
+				margin-top: inherit;
+			}
+			.mat-card-subtitle:last-child {
+				margin-bottom: unset;
+			}
+		}
+	}
+
+	.headerAvatar {
+		background-size: cover;
+		background-position: center center;
+		width: 40px;
+		height: 40px;
+	}
+
+	.imageHolder {
+		display: block;
+		align-items: center;
+
+		.mat-card-image.centerImage {
+			display: block;
+			margin: auto;
+			width: 70%;
+		}
+	}
+
+	.mat-card-content {
+		padding-top: 10px;
+		flex: 1 1;
+		height: calc(100% - 50px);
+		overflow: auto;
+
+		scrollbar-width: thin;
+		scrollbar-color: $fontColor $contentColor;
+
+		p {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			width: 100%;
+			display: block;
+		}
+	}
+	.mat-card-content:-webkit-scrollbar {
+		width: 11px;
+	}
+	.mat-card-content::-webkit-scrollbar-track {
+		background: $contentColor;
+	}
+	.mat-card-content::-webkit-scrollbar-thumb {
+		background-color: $fontColor;
+		border-radius: 6px;
+		border: 3px solid $contentColor;
+	}
+
+	.mat-card-actions {
+		margin-bottom: -8px;
+		padding-bottom: 0;
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+
+		button {
+			margin-right: 5px;
+		}
+
+		button:last-child {
+			margin-right: 0px;
+		}
+	}
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+	box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.3)
+}

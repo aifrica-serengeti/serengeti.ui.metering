@@ -1,0 +1,24 @@
+<main class="home-content">
+  <mat-drawer-container class="main-container" autosize>
+    <div id="wrapper">
+      <div id="header">
+        <ul>
+          <li><a [routerLink]="['/main', { outlets: { content: 'metering/list' }}]">Metering</a></li>
+          <li>
+            <a mat-menu-item [matMenuTriggerFor]="themeMenu">
+              <span translate>common.theme.title</span>
+            </a>
+          </li>
+          <mat-menu #themeMenu="matMenu">
+            <button mat-menu-item (click)="doChangeTheme(theme)" *ngFor="let theme of themes">
+              <mat-icon>{{ selectedTheme === theme ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
+              <span translate>common.theme.options.{{theme}}</span>
+            </button>
+          </mat-menu>
+        </ul>
+      </div>
+    </div>
+    <router-outlet name="content"></router-outlet>
+
+  </mat-drawer-container>
+</main>

@@ -1,0 +1,38 @@
+.cdk-overlay-pane .mat-dialog-container {
+	overflow: inherit;
+}
+
+.mat-dialog-title {
+	margin: 0 0 20px;
+	display: flex;
+	background-color: lightseagreen;
+	padding: 5px;
+	padding-left: 15px;
+	border-radius: 10px;
+	cursor: move;
+	align-items: center;
+
+	.select-title-icon {
+		vertical-align: middle;
+		margin-right: 8px;  
+	}
+}
+
+.mat-dialog-content { 
+	height: calc(100% - 100px); 
+	overflow: auto; 
+	max-height: inherit;
+}
+  
+.mat-dialog-actions button {
+	margin-right: 5px;
+
+	mat-icon {
+		margin-right: 4px;
+	}
+	
+	button:last-child {
+		margin-right: 0px;
+	}
+}
+

@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import '~font-awesome/css/font-awesome.css';
+@import 'src/assets/scss/theme.scss';
+@import 'src/assets/scss/state.scss';
+@import 'src/assets/scss/toaster.scss';
+
+.full-screen-modal {
+  .mat-dialog-container {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+body {
+  color: $fontColor;
+  background-color: $contentColor;
+
+  a:hover {
+    color: $hoverColor;
+  }
+}
+
+.mat-menu-panel {
+  background: $contentColor;
+  color: $fontColor;
+
+  .mat-menu-item {
+    color: inherit;
+
+    .mat-icon {
+      color: inherit;
+    }
+  }
+}
+
+.mat-form-field {
+  color: $fontColor !important;
+
+  .mat-form-field-label {
+    color: inherit;
+  }
+}
+
+#chartjs-tooltip {
+  background-color: white;
+}
+
+html, body {
+  height: 100%;
+}
+
+span.enabled:before, span.Enabled:before, span.up:before, span.Up:before {
+  color: #33CC33;
+}
+span.disabled:before, span.Disabled:before, span.down:before, span.Down:before {
+  color: #FF9900;
+}
+
+
+body .mat-drawer-container {
+  height: 100%;
+}
+
+.full-width.mainContent {
+  display: block;
+}
+
+.full-width {
+  width: 100%;
+}
+

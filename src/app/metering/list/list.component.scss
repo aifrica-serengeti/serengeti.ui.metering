@@ -1,0 +1,82 @@
+@import 'src/assets/scss/logo.scss';
+
+:host {
+  width: 100%;
+
+  .control {
+    display: flex;
+    align-items: center;
+
+    .button-row {
+      display: flex;
+      align-items: center;
+
+      span.title {
+        margin-right: 10px;
+      }
+
+      a,button,mat-form-field {
+        min-width: 100px;
+        margin: 0px 4px;
+      }
+
+      mat-form-field {
+        min-width: 200px;
+        flex: 1;
+      }
+
+      .additional-resource-control {
+        display: inline-block;
+      }
+    }
+
+    .button-row:first-child {
+      flex: 1;
+    }
+  }
+
+  app-table ::ng-deep tr {
+    td.id-check, th.id-check {
+      text-align: center;
+      vertical-align: middle;
+      padding-top: 10px;
+    }
+
+    td.volume-state {
+      min-width: 100px;
+    }
+
+    td.volume-type {
+      max-width: 170px;
+
+      div.table-cell {
+        width: 100%;
+        text-align: left;
+      }
+
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+      }
+    }
+
+    td.volume-name {
+      max-width: 350px;
+
+      div.table-cell {
+        width: 100%;
+        text-align: left;
+      }
+
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+      }
+    }
+  }
+}
+
