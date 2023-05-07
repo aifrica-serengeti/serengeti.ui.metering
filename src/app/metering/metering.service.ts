@@ -17,10 +17,21 @@ export class MeteringService {
     @Optional() config: Configurations) {
     this.endPoint = Configurations.getServiceMeteringEndPoint(config);
     if (!this.endPoint.endsWith('/')) {
-      this.endPoint += '/';
+      this.endPoint += '/metering/';
     }
   }
-  public getMeteringCloudList(): Observable<any> {
+  public getMeteringList(page, size, sortItem, sortOrder): Observable<any> {
+    const url = this.endPoint;
+
+    const param = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('sortItem', sortItem)
+      .set('sortOrder', sortOrder);
+    return this.messageService.query(url, param);
+  }
+
+  getMeteringCloudList(): Observable<any> {
     const url = this.endPoint + 'cloud';
 
     const param = new HttpParams()
@@ -31,23 +42,20 @@ export class MeteringService {
     return this.messageService.query(url, param);
   }
 
-  getMeteringList(cloudId, page, size, sortItem, sortOrder): Observable<any> {
-    const url = this.endPoint;
+  getMeteringLog(meteringId): Observable<any>{
+    const url = this.endPoint + 'log';
 
     const param = new HttpParams()
-      .set('cloudId', cloudId)
-      .set('page', page)
-      .set('size', size)
-      .set('sortItem', sortItem)
-      .set('sortOrder', sortOrder);
-
+      .set('meteringId', meteringId);
     return this.messageService.query(url, param);
   }
 
-  getMeteringPrice(meteringId) {
-    const url = this.endPoint + meteringId + '/price';
+  getMeteringStatistics(id) {
+    const url = this.endPoint + 'statistics';
 
-    return this.messageService.query(url);
+    const param = new HttpParams()
+      .set('cloudId', id);
+    return this.messageService.query(url, param);
 
   }
 }
