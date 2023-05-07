@@ -14,7 +14,7 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {MeteringDetailComponent} from './metering/detail/detail.component';
 import {MeteringListComponent} from './metering/list/list.component';
-import {PriceDialogComponent} from './metering/detail/price-dialog/price-dialog.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 export function getLoginEndPoint() {
   if (SerengetiMeteringModule.config && SerengetiMeteringModule.config.createTranslateLoader) {
@@ -48,7 +48,7 @@ export function createTranslateLoader(http: HttpClient) {
     HomeComponent,
     MeteringListComponent,
     MeteringDetailComponent,
-    PriceDialogComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,9 +64,6 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     RouterModule,
     SerengetiCommonUIModule,
-  ],
-  entryComponents: [
-    PriceDialogComponent
   ],
   providers: [
     TranslateService,
