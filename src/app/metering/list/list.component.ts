@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatDialog} from '@angular/material';
 import {Router} from '@angular/router';
 import {
   CheckboxComponent,
@@ -6,6 +7,7 @@ import {
   TableColumn,
   TableComponent
 } from '@serengeti/serengeti-common';
+import {MeteringDetailComponent} from '../detail/detail.component';
 import {MeteringService} from '../metering.service';
 
 @Component({
@@ -26,7 +28,11 @@ export class MeteringListComponent implements OnInit {
 
   meteringList = [];
 
-  constructor(private meteringService: MeteringService, private router: Router) {
+  constructor(
+    private meteringService: MeteringService,
+    private router: Router,
+    private dialog: MatDialog,
+  ) {
     this.columns = [
       this.idColumn = new IdentifierTableColumn('id', '', false)
         .withHeaderCheck(true).withIgnoreSort(true)
@@ -84,8 +90,17 @@ export class MeteringListComponent implements OnInit {
 
   goDetail($event: any) {
     const metering = $event.element.getData();
-    console.log(metering);
-    this.router.navigate(['/main', { outlets: { content: 'metering/detail/' + metering.meteringId}}]);
+
+    const dialogRef = this.dialog.open(MeteringDetailComponent, {
+      width: '1024px',
+      height: '700px',
+      data: metering
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
+    // this.router.navigate(['/main', { outlets: { content: 'metering/detail/' + metering.meteringId}}]);
   }
 
 }
