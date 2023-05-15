@@ -42,7 +42,7 @@ export class MeteringService {
     return this.messageService.query(url, param);
   }
 
-  getMeteringLog(meteringId): Observable<any>{
+  getMeteringLog(meteringId): Observable<any> {
     const url = this.endPoint + 'log';
 
     const param = new HttpParams()
@@ -50,12 +50,30 @@ export class MeteringService {
     return this.messageService.query(url, param);
   }
 
-  getMeteringStatistics(id) {
+  getMeteringStatistics(cloudId, startDate, endDate) {
     const url = this.endPoint + 'statistics';
 
     const param = new HttpParams()
-      .set('cloudId', id);
+      .set('cloudId', cloudId)
+      .set('startDate', startDate)
+      .set('endDate', endDate);
     return this.messageService.query(url, param);
 
+  }
+
+  searchCloud(): Observable<any> {
+    const url = this.endPoint + 'cloud';
+    return this.messageService.query(url);
+  }
+
+  searchResourceType(cloudId: any, selectResourceType, startDate: any, endDate: any): Observable<any> {
+    const url = this.endPoint + 'resource';
+
+    const params = new HttpParams()
+      .set('cloudId', cloudId)
+      .set('resourceType', selectResourceType)
+      .set('startDate', startDate)
+      .set('endDate', endDate);
+    return this.messageService.query(url, params);
   }
 }

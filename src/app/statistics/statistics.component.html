@@ -1,1 +1,40 @@
-<button  *ngFor="let cloud of cloudList" (click)="detail(cloud)">{{cloud.name}}</button>
+<div>
+  <button  *ngFor="let cloud of cloudList" (click)="selectedCloud(cloud)">{{cloud.cloudName}}</button>
+</div>
+
+<div>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="시작 날짜" [(ngModel)]="startDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker2" placeholder="종료 날짜" [(ngModel)]="endDate">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<div>
+  <select [(ngModel)]="resourceType" (ngModelChange)="selectedResourceType($event)">
+    <option value="Instance" [defaultSelected]="true">Instance</option>
+    <option value="Image">Image</option>
+    <option value="Volume">Volume</option>
+    <option value="NetworkInterface">NetworkInterface</option>
+    <option value="Secret">Secret</option>
+    <option value="LoadBalance">LoadBalance</option>
+  </select>
+</div>
+
+<div>
+  <button  (click)="search()">조회</button>
+</div>
+
+<div *ngIf="meteringStatistics">
+  <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions">
+  </canvas>
+</div>
