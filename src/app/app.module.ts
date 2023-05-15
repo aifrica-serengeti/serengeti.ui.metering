@@ -4,6 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {ChartsModule, ThemeService} from 'ng2-charts';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 import {Configurations} from '../Configuration';
 import {environment} from '../environments/environment';
@@ -55,6 +56,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
+    ChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -67,7 +69,8 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     TranslateService,
-    Configurations
+    Configurations,
+    ThemeService
   ],
   bootstrap: [AppComponent]
 })
