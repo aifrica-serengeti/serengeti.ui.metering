@@ -1,5 +1,40 @@
-<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
-  <mat-icon class="icon">storage</mat-icon>
-  <span>test</span>
-</h1>
-<textarea class="metering-log" *ngIf="meteringLog" [(ngModel)]="meteringLog.meteringData"></textarea>
+<div class="container">
+  <div class="button-container">
+    <button mat-button color="primary" class="button" (click)="goBack()">뒤로가기</button>
+  </div>
+  <div class="detail-list-container">
+    <div class="metering-container">
+      <mat-form-field>
+        <mat-label>클라우드 정보</mat-label>
+        <input matInput [(ngModel)]="metering.cloudType"/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>클라우드 이름</mat-label>
+        <input matInput [(ngModel)]="metering.cloudName"/>
+      </mat-form-field>
+    </div>
+    <div class="resource-container">
+      <mat-form-field>
+        <mat-label>자원 이름</mat-label>
+        <input matInput type="text" [(ngModel)]="metering.meteringName"/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>자원 상태</mat-label>
+        <input matInput [(ngModel)]="metering.status"/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>자원 타입</mat-label>
+        <input matInput [(ngModel)]="metering.meteringType"/>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="content">
+    <app-table #meteringLogList
+               (dataReload)="doRefresh($event)"
+               [detailPageType]="getDetailPageType()"
+               [pagable]="true"
+               [pageSize]="10"
+               [pageSizeOptions]="[10, 15, 20, 50, 100]">
+    </app-table>
+  </div>
+</div>

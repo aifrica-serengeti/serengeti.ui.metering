@@ -1,6 +1,66 @@
-@import 'src/assets/scss/dialog.scss';
+:host ::ng-deep .ngx-json-viewer .segment-value .ng-star-inserted {
+  overflow-x: hidden;
+}
 
-.metering-log {
-  width: 99%;
-  height: 88%;
+
+.container {
+  height: 100%;
+  padding: 1%;
+
+  .detail-list-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+
+    .metering-container {
+      grid-column: 1 / 2;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 10px;
+    }
+
+    .resource-container {
+      grid-column: 2 / 3;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 10px;
+    }
+  }
+
+  .button-container {
+    float: right;
+    text-align: right;
+    margin-top: 10px;
+  }
+
+  .content {
+    clear: both;
+    margin-top: 20px;
+
+    ::ng-deep .ngx-json-viewer .segment-value .ng-star-inserted {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .ngx-json-viewer {
+      section {
+        width: 100px;
+      }
+      #_ngcontent-nmo-c21 {
+        width: 100px;
+      }
+      .segment-main {
+        width: 100px;
+      }
+
+      .expandable {
+        width: 100px;
+      }
+      .span {
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
 }

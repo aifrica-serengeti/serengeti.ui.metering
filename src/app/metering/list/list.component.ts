@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from '@angular/material';
 import {Router} from '@angular/router';
 import {
   CheckboxComponent,
@@ -7,8 +6,7 @@ import {
   TableColumn,
   TableComponent
 } from '@serengeti/serengeti-common';
-import {MeteringDetailComponent} from '../detail/detail.component';
-import {MeteringService} from '../metering.service';
+import {MeteringService} from '../service/metering.service';
 
 @Component({
   selector: 'lib-metering-list',
@@ -19,7 +17,7 @@ export class MeteringListComponent implements OnInit {
 
   page = 0;
   size = 20;
-  sortItem = 'requestDate';
+  sortItem = 'createdDate';
   sortOrder = 'desc';
 
   idColumn: TableColumn;
@@ -31,20 +29,17 @@ export class MeteringListComponent implements OnInit {
   constructor(
     private meteringService: MeteringService,
     private router: Router,
-    private dialog: MatDialog,
   ) {
     this.columns = [
       this.idColumn = new IdentifierTableColumn('id', '', false)
         .withHeaderCheck(true).withIgnoreSort(true)
         .withType(CheckboxComponent)
         .withStyles('id-check'),
-      new TableColumn('ownerId', 'metering.list.cloud.ownerId'),
       new TableColumn('cloudType', 'metering.list.cloud.type'),
       new TableColumn('cloudName', 'metering.list.cloud.name'),
       new TableColumn('meteringType', 'metering.list.metering.type'),
       new TableColumn('meteringName', 'metering.list.metering.name'),
-      new TableColumn('requestDate', 'metering.list.metering.request-date')
-    ]
+    ];
   }
 
   ngOnInit() {
@@ -52,55 +47,31 @@ export class MeteringListComponent implements OnInit {
   }
 
   public doRefresh(event?) {
-    console.log(event);
-
     if (event) {
       this.page = event.pageNumber;
       this.size = event.pageSize;
       this.sortOrder = event.sortOrder;
+    } else {
+      this.pageReset();
     }
+
     this.meteringService.getMeteringList(this.page, this.size, this.sortItem, this.sortOrder).subscribe((result) => {
-      console.log(result);
       this.meteringList = result.content;
-    //   for (const meteringContent of result.content) {
-    //     const metering = {
-    //       id: meteringContent.cloudId,
-    //       cloudName: meteringContent.cloudName,
-    //       cloudType: meteringContent.cloudType,
-    //       cpu: 0,
-    //       memory: 0,
-    //       gpu: 0
-    //     };
-    //
-    //     for (const meteringValue of meteringContent.meteringList) {
-    //       console.log(meteringValue);
-    //       if (meteringValue.status === 'Activate') {
-    //         if (meteringValue.meteringType === 'Volume') {
-    //           metering.memory += metering.memory + meteringValue.size;
-    //         } else if (meteringValue.meteringType === 'Instance') {
-    //           metering.cpu += metering.cpu + meteringValue.size;
-    //         }
-    //       }
-    //     }
-    //     this.meteringList.push(metering);
-    //   }
       this.list.refresh(result.totalElements, this.meteringList, this.columns, event);
     });
+  }
+
+  public pageReset() {
+    this.page = 0;
+    this.size = 20;
+    this.sortOrder = 'desc';
+    this.sortItem = 'requestedDate';
   }
 
   goDetail($event: any) {
     const metering = $event.element.getData();
 
-    const dialogRef = this.dialog.open(MeteringDetailComponent, {
-      width: '1024px',
-      height: '700px',
-      data: metering
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-    });
-    // this.router.navigate(['/main', { outlets: { content: 'metering/detail/' + metering.meteringId}}]);
+    this.router.navigate(['/main', { outlets: { content: 'metering/detail/' + metering.meteringId }}]);
   }
 
 }

@@ -2,7 +2,7 @@ import {HttpParams} from '@angular/common/http';
 import {Injectable, Optional} from '@angular/core';
 import {LoginService, MessageService} from '@serengeti/serengeti-common';
 import {Observable} from 'rxjs';
-import {Configurations} from '../../Configuration';
+import {Configurations} from '../../../Configuration';
 
 @Injectable({
   providedIn: 'root'
@@ -42,16 +42,16 @@ export class MeteringService {
     return this.messageService.query(url, param);
   }
 
-  getMeteringLog(meteringId): Observable<any> {
-    const url = this.endPoint + 'log';
+  getMeteringLogData(logId): Observable<any> {
+    const url = this.endPoint + 'log/data';
 
     const param = new HttpParams()
-      .set('meteringId', meteringId);
+      .set('logId', logId);
     return this.messageService.query(url, param);
   }
 
   getMeteringStatistics(cloudId, startDate, endDate) {
-    const url = this.endPoint + 'statistics';
+    const url = this.endPoint + 'statistics/';
 
     const param = new HttpParams()
       .set('cloudId', cloudId)
@@ -66,14 +66,23 @@ export class MeteringService {
     return this.messageService.query(url);
   }
 
-  searchResourceType(cloudId: any, selectResourceType, startDate: any, endDate: any): Observable<any> {
-    const url = this.endPoint + 'resource';
+  getMeteringDetailList(page, size, sortItem, sortOrder, meteringId: any): Observable<any> {
+    const url = this.endPoint + 'detail/list';
 
     const params = new HttpParams()
-      .set('cloudId', cloudId)
-      .set('resourceType', selectResourceType)
-      .set('startDate', startDate)
-      .set('endDate', endDate);
+      .set('page', page)
+      .set('size', size)
+      .set('sortItem', sortItem)
+      .set('sortOrder', sortOrder)
+      .set('meteringId', meteringId);
+    return this.messageService.query(url, params);
+  }
+
+  selectMetering(meteringId): Observable<any> {
+    const url = this.endPoint + 'detail';
+
+    const params = new HttpParams()
+      .set('meteringId', meteringId);
     return this.messageService.query(url, params);
   }
 }

@@ -28,8 +28,8 @@
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
     "@serengeti/serengeti-common": "^1.0.99",
-    "@serengeti/serengeti-editor": "^1.0.58",
     "ng2-charts": "^2.4.3",
+    "ngx-json-viewer": "^2.4.0",
     "rxjs": "^6.5.5",
     "tslib": "^1.14.1",
     "zone.js": "~0.9.1"

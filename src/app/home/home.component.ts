@@ -11,7 +11,7 @@ import {Configurations} from '../../Configuration';
 export class HomeComponent implements OnInit {
   themes = [] as string[];
   themeConfig: any;
-  selectedTheme = 'dark';
+  selectedTheme = 'light';
 
   config: Configurations;
 
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
         this.themes.push(theme);
       }
     }
-    this.doChangeTheme('dark');
+    this.doChangeTheme('light');
   }
 
   doChangeTheme(theme: string) {

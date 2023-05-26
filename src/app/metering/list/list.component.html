@@ -1,5 +1,12 @@
-<app-table #meteringCloudList (dataReload)="doRefresh($event)"
-           (dataRowClicked)="goDetail($event)"
-           [pagable]="true"
-           [pageSize]="20"
-           [pageSizeOptions]="[10, 15, 20, 50, 100]"></app-table>
+<div class="metering-list">
+  <div class="search-container">
+
+  </div>
+  <div class="table-container">
+    <app-table #meteringCloudList (dataReload)="doRefresh($event)"
+               (dataRowClicked)="goDetail($event)"
+               [pagable]="true"
+               [pageSize]="20"
+               [pageSizeOptions]="[10, 15, 20, 50, 100]"></app-table>
+  </div>
+</div>

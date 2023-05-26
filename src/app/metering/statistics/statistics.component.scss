@@ -1,0 +1,35 @@
+:host {
+  height: 80%;
+}
+.statistics-container {
+  padding : 2%;
+
+  .setting-container {
+    order: 1;
+    transition: width 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+
+    mat-form-field {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .select-cloud {
+      width: 50%;
+    }
+
+    .datepicker-content {
+      width: 20%;
+    }
+  }
+
+  .chart-container {
+    order: 2;
+    transition: width 0.5s;
+  }
+
+}
+

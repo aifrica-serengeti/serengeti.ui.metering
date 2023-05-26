@@ -1,6 +1,8 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
     "trailing-comma": false,
     "member-access": false,
     "align": {
@@ -22,13 +24,15 @@
       true,
       "attribute",
       "app",
-      "camelCase"
+      "camelCase",
+      "lib"
     ],
     "component-selector": [
       true,
       "element",
       "app",
-      "kebab-case"
+      "kebab-case",
+      "lib"
     ],
     "eofline": true,
     "import-blacklist": [

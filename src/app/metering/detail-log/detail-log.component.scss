@@ -1,0 +1,101 @@
+:host {
+  .ngx-json-viewer {
+    section {
+      width: 100px;
+    }
+    #_ngcontent-nmo-c21 {
+      width: 100px;
+    }
+    .segment-main {
+      width: 100px;
+    }
+
+    .expandable {
+      width: 100px;
+    }
+    .span {
+      width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+.ngx-json-viewer {
+  ::ng-deep .segment-value .ng-star-inserted {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  section {
+    width: 100px;
+  }
+  ::ng-deep .span {
+    overflow-x: hidden !important;
+    text-overflow: ellipsis !important;;
+  }
+  overflow-x: hidden !important;
+
+  .span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #_ngcontent-nmo-c21 {
+    width: 100px;
+  }
+  .segment-main {
+    width: 100px;
+  }
+
+  .expandable {
+    width: 100px;
+  }
+  .span {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.json-viewer {
+  .segment {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  width: 100px;
+  ::ng-deep .segment-value .ng-star-inserted {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  section {
+    width: 100px;
+  }
+  ::ng-deep .span {
+    overflow-x: hidden !important;
+    text-overflow: ellipsis !important;;
+  }
+  overflow-x: hidden !important;
+
+  .span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #_ngcontent-nmo-c21 {
+    width: 100px;
+  }
+  .segment-main {
+    width: 100px;
+  }
+
+  .expandable {
+    width: 100px;
+  }
+  .span {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -1,0 +1,31 @@
+<div class="statistics-container">
+  <div class="setting-container">
+    <mat-form-field class="select-cloud" >
+      <mat-label>클라우드 선택</mat-label>
+      <mat-select [(ngModel)]="selectCloud">
+        <mat-option *ngFor="let cloud of cloudList" [value]="cloud">{{cloud.cloudName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="datepicker-content">
+      <input matInput [matDatepicker]="picker" placeholder="시작 날짜" [(ngModel)]="startDate"
+             (ngModelChange)="dateFormat()">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="datepicker-content">
+      <input matInput [matDatepicker]="picker2" placeholder="종료 날짜" [(ngModel)]="endDate"
+             (ngModelChange)="dateFormat()">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <button mat-button (click)="search()">조회</button>
+  </div>
+  <div class="chart-container">
+    <canvas baseChart
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [chartType]="lineChartType"
+            [options]="lineChartOptions">
+    </canvas>
+  </div>
+</div>

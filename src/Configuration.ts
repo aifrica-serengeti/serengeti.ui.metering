@@ -8,7 +8,7 @@ import {Observable, Subject} from 'rxjs';
 })
 export class Configurations {
 
-  public static serviceTheme = 'dark';
+  public static serviceTheme = 'light';
   public static serviceThemeObserver = new Subject<any>();
 
   public createTranslateLoader: (client: HttpClient) => MultiTranslateHttpLoader;
