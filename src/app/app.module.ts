@@ -5,7 +5,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {ChartsModule, ThemeService} from 'ng2-charts';
-import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 import {Configurations} from '../Configuration';
 import {environment} from '../environments/environment';
@@ -13,11 +13,14 @@ import {SerengetiCommonUIModule} from '../modules/common.ui.module';
 import {MaterialModule} from '../modules/material.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HomeComponent} from './home/home.component';
-import { MeteringDetailLogComponent } from './metering/detail-log/detail-log.component';
+import {HomeComponent} from './common/home/home.component';
+import {MeteringDetailLogComponent} from './metering/detail/detail-log/detail-log.component';
 import {MeteringDetailListComponent} from './metering/detail/detail.component';
 import {MeteringListComponent} from './metering/list/list.component';
-import { StatisticsComponent } from './metering/statistics/statistics.component';
+import {StatisticsComponent} from './metering/statistics/statistics.component';
+import {StatisticsTestComponent} from './common/statistics-test/statistics-test.component';
+import {MeteringDetailTableComponent} from './metering/detail/detail-table/detail-table.component';
+import { StatisticsDetailTableComponent } from './metering/statistics/statistics-detail-table/statistics-detail-table.component';
 
 export function getLoginEndPoint() {
   if (SerengetiMeteringModule.config && SerengetiMeteringModule.config.createTranslateLoader) {
@@ -55,28 +58,34 @@ export function createTranslateLoader(http: HttpClient) {
     MeteringDetailListComponent,
     StatisticsComponent,
     MeteringDetailLogComponent,
+    StatisticsTestComponent,
+    MeteringDetailTableComponent,
+    StatisticsDetailTableComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MaterialModule,
-        HttpClientModule,
-        ChartsModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-        RouterModule,
-        SerengetiCommonUIModule,
-        NgxJsonViewerModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MaterialModule,
+    HttpClientModule,
+    ChartsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    RouterModule,
+    SerengetiCommonUIModule,
+    NgxJsonViewerModule,
+  ],
   providers: [
     TranslateService,
     Configurations,
     ThemeService
+  ],
+  entryComponents: [
+    StatisticsDetailTableComponent
   ],
   bootstrap: [AppComponent]
 })

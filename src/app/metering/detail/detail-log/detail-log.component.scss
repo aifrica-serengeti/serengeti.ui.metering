@@ -1,0 +1,6 @@
+::ng-deep .segment > .expandable > span.segment-value {
+  display: inline-block !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  width: 80vw !important;
+}

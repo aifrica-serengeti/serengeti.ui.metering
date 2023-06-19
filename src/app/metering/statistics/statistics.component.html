@@ -22,10 +22,22 @@
   </div>
   <div class="chart-container">
     <canvas baseChart
-            [datasets]="lineChartData"
-            [labels]="lineChartLabels"
-            [chartType]="lineChartType"
-            [options]="lineChartOptions">
+            [datasets]="chartData"
+            [labels]="chartLabels"
+            [chartType]="chartType"
+            [options]="chartOptions"
+            width="90" height="18">
     </canvas>
   </div>
+</div>
+
+<div class="table-container">
+  <div>
+    <button mat-button color="primary" (click)="excel()">엑셀 다운로드</button>
+  </div>
+  <app-table #meteringStatistics
+             (dataReload)="doSearch($event)"
+             [detailPageType]="getDetailPageType()"
+             [pagable]="false">
+  </app-table>
 </div>

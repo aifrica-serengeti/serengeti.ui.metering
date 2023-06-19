@@ -1,7 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, Type, ViewChild} from '@angular/core';
+import {DataReloadEvent, TableColumn, TableComponent, TableDetailPage} from '@serengeti/serengeti-common';
 import {ChartType} from 'chart.js';
 import {BaseChartDirective, Label} from 'ng2-charts';
+import {MeteringDetailTableComponent} from '../detail/detail-table/detail-table.component';
 import {MeteringService} from '../service/metering.service';
+import {ExcelService} from './excel.service';
+import {Statistics} from './Statistics';
+import {StatisticsDetailTableComponent} from './statistics-detail-table/statistics-detail-table.component';
+import {StatisticsExcel} from './StatisticsExcel';
 
 @Component({
   selector: 'lib-metering-statistics',
@@ -16,40 +22,71 @@ export class StatisticsComponent implements OnInit {
   endDate = null;
   day = false;
 
-  selectCloud;
+  selectCloud = null;
 
-  meteringStatistics;
-  isChartExpanded = false;
+  meteringOriginStatisticsList = [];
+  meteringStatisticsList: Statistics[] = [];
+
+  currentCondition: DataReloadEvent;
+  @ViewChild('meteringStatistics', {static: true}) list: TableComponent;
+  columns: TableColumn[] = [
+    new TableColumn('cloudName', 'metering.statistics.cloud'),
+    new TableColumn('statisticsDayTime', 'metering.statistics.time'),
+    new TableColumn('cpu', 'metering.statistics.cpu'),
+    new TableColumn('gpu', 'metering.statistics.gpu'),
+    new TableColumn('memory', 'metering.statistics.memory'),
+    new TableColumn('disk', 'metering.statistics.disk')
+  ];
 
   constructor(
-    private meteringService: MeteringService
+    private meteringService: MeteringService,
+    private excelService: ExcelService
   ) {
+    this.currentCondition = new DataReloadEvent('statisticsDay', 'desc', 0, 15);
     const currentDate = new Date(); // 현재 날짜를 얻음
     const year = currentDate.getFullYear(); // 현재 년도를 얻음
     const month = currentDate.getMonth(); // 현재 월을 얻음
 
     this.startDate = new Date(year, month, 1);
     this.endDate = new Date(year, month + 1, 0);
-    console.log('startDate => ' + this.startDate);
-    console.log('endDate => ' + this.endDate);
   }
 
   @ViewChild(BaseChartDirective, {static: false}) chart?: BaseChartDirective;
 
-  public lineChartLabels: Label[] = [];
-  public lineChartData = [
-    { data: [], label: 'CPU' },
-    { data: [], label: 'GPU' },
-    { data: [], label: 'MEMORY' },
-    { data: [], label: 'DISK' }
+  public chartLabels: Label[] = [];
+  public chartData = [
+    {data: [], label: 'CPU', backgroundColor: 'rgba(0, 0, 0, 0)', type: 'line', yAxisID: 'left-axis'},
+    {data: [], label: 'GPU', backgroundColor: 'rgba(0, 0, 0, 0)', type: 'line', yAxisID: 'left-axis'},
+    {data: [], label: 'MEMORY', type: 'bar', yAxisID: 'right-axis'},
+    {data: [], label: 'DISK', backgroundColor: 'rgba(0, 0, 0, 0.7)', type: 'bar', yAxisID: 'right-axis'}
   ];
-  public lineChartType: ChartType = 'line';
-  public lineChartOptions = {
+  public chartType: ChartType = 'line';
+  public chartOptions = {
     responsive: true,
     plugins: {
       legend: {
         onClick: this.chartClick.bind(this)
       }
+    },
+    scales: {
+      yAxes: [
+        {
+          id: 'left-axis',
+          position: 'left',
+          scaleLabel: {
+            display: true,
+            labelString: 'EA'
+          }
+        },
+        {
+          id: 'right-axis',
+          position: 'right',
+          scaleLabel: {
+            display: true,
+            labelString: 'Gi'
+          }
+        }
+      ]
     }
   };
 
@@ -68,94 +105,87 @@ export class StatisticsComponent implements OnInit {
   }
 
   search() {
+    if (!this.selectCloud) {
+      alert('클라우드를 선택해 주세요');
+      return;
+    }
+
     if (this.startDate === null || this.endDate === null) {
       alert('날짜를 지정해 주세요');
       return;
     }
 
-    console.log(this.startDate);
-    console.log(this.endDate);
+    this.doSearch();
+  }
+
+  public doSearch(condition?: DataReloadEvent) {
+    if (condition) {
+      this.currentCondition = condition;
+    } else {
+      condition = this.currentCondition;
+    }
+
     const startDate = new Date(this.startDate.getTime());
     const endDate = new Date(this.endDate.getTime());
-    startDate.getDate()
+    this.day = startDate.toDateString() === endDate.toDateString();
+    if (this.day) {
+      condition.active = 'statisticsTime';
+    } else {
+      condition.active = 'statisticsDay';
+    }
 
     this.meteringService.getMeteringStatistics(this.selectCloud.cloudId, this.formatDate(startDate), this.formatDate(endDate))
       .subscribe((result) => {
-        this.day = false;
-        this.meteringStatistics = result;
-        this.lineChartLabels = [];
-        this.lineChartData = [
-          { data: [], label: 'CPU' },
-          { data: [], label: 'GPU' },
-          { data: [], label: 'MEMORY' },
-          { data: [], label: 'DISK' }
-        ];
-
-        if (startDate.toDateString() === endDate.toDateString()) {
-          this.day = true;
+        this.meteringOriginStatisticsList = result.slice();
+        this.chartLabels = [];
+        this.chartData.forEach((data) => {
+          data.data = [];
+        });
+        this.meteringStatisticsList = [];
+        if (this.day) {
           // 같은 날짜인 경우
+          this.statisticsSetting(result);
           for (let hour = 0; hour < 24; hour++) {
-            this.lineChartLabels.push(hour.toString());
-            const metering = this.dataSetting(hour.toString(), result);
-            if (metering) {
-              this.lineChartData[0].data.push(metering.cpu);
-              this.lineChartData[1].data.push(metering.gpu);
-              this.lineChartData[2].data.push(metering.memory);
-              this.lineChartData[3].data.push(metering.disk);
-            } else {
-              this.lineChartData[0].data.push(0);
-              this.lineChartData[1].data.push(0);
-              this.lineChartData[2].data.push(0);
-              this.lineChartData[3].data.push(0);
-            }
-
+            this.chartLabels.push(hour.toString());
+            const metering = this.selectStatisticsOfCurrentDate(hour.toString(), result);
+            this.chartDataSetting(metering);
           }
+          this.columns[1] = new TableColumn('statisticsDayTime', 'metering.statistics.time');
         } else {
-          console.log('not day');
-
           // 다른 날짜인 경우
+          this.statisticsSetting(result);
+
           while (startDate <= endDate) {
             const dateString = startDate.toLocaleDateString();
-            this.lineChartLabels.push(dateString);
+            this.chartLabels.push(dateString);
             startDate.setDate(startDate.getDate() + 1);
-            const metering = this.dataSetting(dateString, result);
-            if (metering) {
-              this.lineChartData[0].data.push(metering.cpu);
-              this.lineChartData[1].data.push(metering.gpu);
-              this.lineChartData[2].data.push(metering.memory);
-              this.lineChartData[3].data.push(metering.disk);
-            } else {
-              this.lineChartData[0].data.push(0);
-              this.lineChartData[1].data.push(0);
-              this.lineChartData[2].data.push(0);
-              this.lineChartData[3].data.push(0);
-            }
+            const metering = this.selectStatisticsOfCurrentDate(dateString, result);
+            this.chartDataSetting(metering);
           }
+          this.columns[1] = new TableColumn('statisticsDayTime', 'metering.statistics.day');
         }
-    });
+        this.list.refresh(this.meteringStatisticsList.length, this.meteringStatisticsList, this.columns, condition);
+      });
   }
 
-  public dataSetting(date, meteringStatistics): any {
-    for (const meteringValue of meteringStatistics) {
+  public selectStatisticsOfCurrentDate(date, meteringStatisticsList): any {
+    for (const statistics of meteringStatisticsList) {
       let statisticsTime = null;
       if (this.day) {
-        statisticsTime = meteringValue.statisticsTime.substring(0, 2);
+        statisticsTime = statistics.statisticsTime.substring(0, 2);
         if (statisticsTime.startsWith('0')) {
           statisticsTime = statisticsTime.substring(1, 2);
         }
-        console.log(statisticsTime + ' / ' + date);
         if (statisticsTime === date) {
-          const index = meteringStatistics.indexOf(meteringValue);
-          meteringStatistics.splice(index, 1);
-          return meteringValue;
+          return statistics;
         }
       } else {
-        statisticsTime = new Date(meteringValue.statisticsDay);
+        statisticsTime = new Date(statistics.statisticsDay);
         statisticsTime.setHours(0, 0, 0, 0);
         date = new Date(date);
         date.setHours(0, 0, 0, 0);
         if (statisticsTime.getTime() === date.getTime()) {
-          return meteringValue;
+          return statistics;
         }
       }
     }
@@ -176,7 +206,6 @@ export class StatisticsComponent implements OnInit {
   dateFormat() {
     if (this.startDate._d) {
       this.startDate = new Date(this.startDate._d);
-      console.log(this.startDate);
     }
     if (this.endDate._d) {
       this.endDate = new Date(this.endDate._d);
@@ -184,7 +213,37 @@ export class StatisticsComponent implements OnInit {
     }
   }
 
-  toggleChartSize() {
-    this.isChartExpanded = !this.isChartExpanded;
+  private chartDataSetting(metering: any) {
+    if (metering) {
+      this.chartData[0].data.push(metering.cpu);
+      this.chartData[1].data.push(metering.gpu);
+      this.chartData[2].data.push(metering.memory);
+      this.chartData[3].data.push(metering.disk);
+    } else {
+      this.chartData[0].data.push(0);
+      this.chartData[1].data.push(0);
+      this.chartData[2].data.push(0);
+      this.chartData[3].data.push(0);
+    }
+  }
+
+  private statisticsSetting(result: any) {
+    result.forEach((metering) => {
+      const statistic: Statistics = new Statistics(metering, this.day, this.selectCloud.cloudName);
+      this.meteringStatisticsList.push(statistic);
+    });
+  }
+
+  excel() {
+    const statisticsExcelList: StatisticsExcel[] = [];
+    for (const meteringStatistics of this.meteringStatisticsList) {
+      const statisticsExcel = new StatisticsExcel(meteringStatistics);
+      statisticsExcelList.push(statisticsExcel);
+    }
+    this.excelService.exportToExcel(statisticsExcelList, 'test', 'test-sheet');
+  }
+
+  getDetailPageType(): Type<TableDetailPage>  {
+    return StatisticsDetailTableComponent;
   }
 }

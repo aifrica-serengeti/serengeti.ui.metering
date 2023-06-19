@@ -1,9 +1,16 @@
 <div class="metering-list">
   <div class="search-container">
-
+    <mat-form-field class="select-cloud" >
+      <mat-label>클라우드 선택</mat-label>
+      <mat-select [(ngModel)]="selectCloud">
+        <mat-option *ngFor="let cloud of cloudList" [value]="cloud">{{cloud.cloudName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button color="primary" (click)="doRefresh()">검색</button>
   </div>
   <div class="table-container">
-    <app-table #meteringCloudList (dataReload)="doRefresh($event)"
+    <app-table #meteringCloudList
+               (dataReload)="doRefresh($event)"
                (dataRowClicked)="goDetail($event)"
                [pagable]="true"
                [pageSize]="20"

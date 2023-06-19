@@ -20,14 +20,21 @@ export class MeteringService {
       this.endPoint += '/metering/';
     }
   }
-  public getMeteringList(page, size, sortItem, sortOrder): Observable<any> {
+  public getMeteringList(page, size, sortItem, sortOrder, selectCloud): Observable<any> {
     const url = this.endPoint;
+
+    let cloudId = null;
+    if (selectCloud) {
+      cloudId = selectCloud.cloudId;
+    }
+    console.log(cloudId);
 
     const param = new HttpParams()
       .set('page', page)
       .set('size', size)
       .set('sortItem', sortItem)
-      .set('sortOrder', sortOrder);
+      .set('sortOrder', sortOrder)
+      .set('cloudId', cloudId);
     return this.messageService.query(url, param);
   }
 
@@ -84,5 +91,42 @@ export class MeteringService {
     const params = new HttpParams()
       .set('meteringId', meteringId);
     return this.messageService.query(url, params);
+  }
+
+  currentStatistics() {
+    const url = this.endPoint + 'statistics/';
+    return this.messageService.post(url);
+  }
+
+  allCloudStatistics(startDate, endDate): Observable<any> {
+    const url = this.endPoint + 'statistics/all';
+
+    const params = new HttpParams()
+      .set('startDate', startDate)
+      .set('endDate', endDate);
+    return this.messageService.query(url, params);
+  }
+
+  oneCloudStatistics(cloudId, startDate, endDate) {
+    const url = this.endPoint + 'statistics/cloud';
+
+    const params = new HttpParams()
+      .set('cloudId', cloudId)
+      .set('startDate', startDate)
+      .set('endDate', endDate);
+    return this.messageService.query(url, params);
+
+  }
+
+  searchStatisticsDetail(page, size, sortItem, sortOrder, cloudId, currentDate) {
+    const url = this.endPoint + '/statistics/metering/';
+    const param = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('sortItem', sortItem)
+      .set('sortOrder', sortOrder)
+      .set('cloudId', cloudId)
+      .set('currentDate', currentDate);
+    return this.messageService.query(url, param);
   }
 }

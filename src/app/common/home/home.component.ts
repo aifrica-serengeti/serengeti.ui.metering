@@ -1,7 +1,7 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import {LoginService} from '@serengeti/serengeti-common';
 import {Subject} from 'rxjs';
-import {Configurations} from '../../Configuration';
+import {Configurations} from '../../../Configuration';
 
 @Component({
   selector: 'app-home',

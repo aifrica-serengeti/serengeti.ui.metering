@@ -26,6 +26,9 @@ export class MeteringListComponent implements OnInit {
 
   meteringList = [];
 
+  cloudList;
+  selectCloud = null;
+
   constructor(
     private meteringService: MeteringService,
     private router: Router,
@@ -38,12 +41,14 @@ export class MeteringListComponent implements OnInit {
       new TableColumn('cloudType', 'metering.list.cloud.type'),
       new TableColumn('cloudName', 'metering.list.cloud.name'),
       new TableColumn('meteringType', 'metering.list.metering.type'),
+      new TableColumn('status', 'metering.list.metering.status'),
       new TableColumn('meteringName', 'metering.list.metering.name'),
     ];
   }
 
   ngOnInit() {
     this.doRefresh();
+    this.searchCloud();
   }
 
   public doRefresh(event?) {
@@ -55,7 +60,8 @@ export class MeteringListComponent implements OnInit {
       this.pageReset();
     }
 
-    this.meteringService.getMeteringList(this.page, this.size, this.sortItem, this.sortOrder).subscribe((result) => {
+    this.meteringService.getMeteringList(this.page, this.size, this.sortItem, this.sortOrder, this.selectCloud).subscribe((result) => {
+      console.log(result);
       this.meteringList = result.content;
       this.list.refresh(result.totalElements, this.meteringList, this.columns, event);
     });
@@ -72,6 +78,13 @@ export class MeteringListComponent implements OnInit {
     const metering = $event.element.getData();
 
     this.router.navigate(['/main', { outlets: { content: 'metering/detail/' + metering.meteringId }}]);
+  }
+
+  searchCloud() {
+    this.meteringService.searchCloud().subscribe((result) => {
+      this.cloudList = result;
+      console.log(this.cloudList);
+    });
   }
 
 }

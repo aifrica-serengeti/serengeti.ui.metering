@@ -1,8 +1,3 @@
-:host ::ng-deep .ngx-json-viewer .segment-value .ng-star-inserted {
-  overflow-x: hidden;
-}
-
-
 .container {
   height: 100%;
   padding: 1%;
@@ -37,29 +32,25 @@
     clear: both;
     margin-top: 20px;
 
-    ::ng-deep .ngx-json-viewer .segment-value .ng-star-inserted {
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .tableList {
+      width: 100px;
     }
 
     .ngx-json-viewer {
-      section {
-        width: 100px;
-      }
-      #_ngcontent-nmo-c21 {
-        width: 100px;
-      }
-      .segment-main {
-        width: 100px;
-      }
+      .segment {
+        .expandable {
+          width: 100px;
+        }
+        .segment-main {
+          width: 100px !important;
 
-      .expandable {
-        width: 100px;
-      }
-      .span {
-        width: 100px;
-        overflow: hidden;
-        text-overflow: ellipsis;
+          span {
+            width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
       }
     }
   }
