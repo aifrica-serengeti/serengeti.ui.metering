@@ -1,8 +1,8 @@
-import {Component, Input, OnInit, Type, ViewChild} from '@angular/core';
+import {Component, OnInit, Type, ViewChild} from '@angular/core';
 import {DataReloadEvent, TableColumn, TableComponent, TableDetailPage, TableElement} from '@serengeti/serengeti-common';
-import {MeteringDetailLogComponent} from '../../detail/detail-log/detail-log.component';
-import {MeteringLog} from '../../detail/detail-table/MeteringLog';
-import {MeteringService} from '../../service/metering.service';
+import {MeteringDetailLogComponent} from '../../metering/detail/detail-log/detail-log.component';
+import {MeteringLog} from '../../metering/detail/detail-table/MeteringLog';
+import {MeteringService} from '../../metering/service/metering.service';
 import {Statistics} from '../Statistics';
 
 @Component({
@@ -11,11 +11,6 @@ import {Statistics} from '../Statistics';
   styleUrls: ['./statistics-detail-table.component.scss']
 })
 export class StatisticsDetailTableComponent implements OnInit, TableDetailPage {
-
-  page = 0;
-  size = 10;
-  sortItem = 'meteringName';
-  sortOrder = 'asc';
 
   meteringLogList: MeteringLog[] = [];
 
@@ -30,7 +25,7 @@ export class StatisticsDetailTableComponent implements OnInit, TableDetailPage {
     this.columns = [
       new TableColumn('meteringName', 'metering.list.metering.name'),
       new TableColumn('meteringType', 'metering.list.metering.type'),
-      new TableColumn('state', 'metering.list.metering.state'),
+      new TableColumn('state', 'metering.list.metering.current'),
       new TableColumn('cpu', 'metering.list.metering.cpu'),
       new TableColumn('gpu', 'metering.list.metering.gpu'),
       new TableColumn('memory', 'metering.list.metering.memory'),
@@ -39,11 +34,10 @@ export class StatisticsDetailTableComponent implements OnInit, TableDetailPage {
     ];
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   doRefresh(condition?: DataReloadEvent) {
-    console.log(condition);
-    console.log(this.currentCondition);
     if (condition) {
       this.currentCondition = condition;
     } else {
@@ -51,9 +45,12 @@ export class StatisticsDetailTableComponent implements OnInit, TableDetailPage {
     }
     this.meteringLogList = [];
 
-    this.meteringService.searchStatisticsDetail(this.currentCondition.pageNumber, this.currentCondition.pageSize, this.currentCondition.active, this.currentCondition.sortOrder,
-      this.statistics.cloudId, this.statistics.statisticsDayTime).subscribe((result) => {
-      console.log(result);
+    this.meteringService.searchStatisticsDetail(
+      condition.pageNumber,
+      condition.pageSize,
+      condition.active,
+      condition.sortOrder,
+      this.statistics.cloudId, this.statistics.statisticsDayTime, this.statistics.day).subscribe((result) => {
       result.content.forEach((metering) => {
         const meteringLog = new MeteringLog(metering);
         this.meteringLogList.push(meteringLog);
@@ -62,19 +59,12 @@ export class StatisticsDetailTableComponent implements OnInit, TableDetailPage {
     });
   }
 
-  public pageReset() {
-    this.page = 0;
-    this.size = 10;
-    this.sortOrder = 'asc';
-    this.sortItem = 'meteringName';
-  }
-
   setContent(table: TableComponent, element: TableElement, columns: TableColumn[]): void {
     this.statistics = element.getData();
     this.doRefresh();
   }
 
-  getDetailPageType(): Type<TableDetailPage>  {
+  getDetailPageType(): Type<TableDetailPage> {
     return MeteringDetailLogComponent;
   }
 }

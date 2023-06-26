@@ -17,10 +17,11 @@ import {HomeComponent} from './common/home/home.component';
 import {MeteringDetailLogComponent} from './metering/detail/detail-log/detail-log.component';
 import {MeteringDetailListComponent} from './metering/detail/detail.component';
 import {MeteringListComponent} from './metering/list/list.component';
-import {StatisticsComponent} from './metering/statistics/statistics.component';
+import {StatisticsComponent} from './statistics/statistics.component';
 import {StatisticsTestComponent} from './common/statistics-test/statistics-test.component';
 import {MeteringDetailTableComponent} from './metering/detail/detail-table/detail-table.component';
-import { StatisticsDetailTableComponent } from './metering/statistics/statistics-detail-table/statistics-detail-table.component';
+import { StatisticsDetailTableComponent } from './statistics/statistics-detail-table/statistics-detail-table.component';
+import { StatisticsChartTableComponent } from './statistics/chart-table/chart-table.component';
 
 export function getLoginEndPoint() {
   if (SerengetiMeteringModule.config && SerengetiMeteringModule.config.createTranslateLoader) {
@@ -61,6 +62,7 @@ export function createTranslateLoader(http: HttpClient) {
     StatisticsTestComponent,
     MeteringDetailTableComponent,
     StatisticsDetailTableComponent,
+    StatisticsChartTableComponent,
   ],
   imports: [
     BrowserModule,

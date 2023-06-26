@@ -5,7 +5,7 @@ import {StatisticsTestComponent} from './common/statistics-test/statistics-test.
 import {MeteringDetailLogComponent} from './metering/detail/detail-log/detail-log.component';
 import {MeteringDetailListComponent} from './metering/detail/detail.component';
 import {MeteringListComponent} from './metering/list/list.component';
-import {StatisticsComponent} from './metering/statistics/statistics.component';
+import {StatisticsComponent} from './statistics/statistics.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },

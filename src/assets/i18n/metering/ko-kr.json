@@ -20,7 +20,8 @@
         "cpu": "CPU",
         "gpu": "GPU",
         "memory": "MEMORY",
-        "disk": "DISK"
+        "disk": "DISK",
+        "current": "현재 상태"
       }
     },
     "detail": {
@@ -43,7 +44,11 @@
       "cpu": "CPU",
       "gpu": "GPU",
       "memory": "MEMORY",
-      "disk": "DISK"
+      "disk": "DISK",
+      "search": {
+        "cloud": "클라우드를 선택해 주세요.",
+        "date": "날짜를 선택해 주세요"
+      }
     }
   }
 }

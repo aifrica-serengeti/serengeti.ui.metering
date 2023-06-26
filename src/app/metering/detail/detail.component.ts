@@ -35,7 +35,6 @@ export class MeteringDetailListComponent implements OnInit {
   public meteringSearch() {
     this.meteringService.selectMetering(this.meteringId).subscribe((result) => {
       this.metering = result;
-      console.log(this.metering);
     });
   }
 

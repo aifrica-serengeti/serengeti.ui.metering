@@ -4,3 +4,7 @@
   overflow: hidden !important;
   width: 80vw !important;
 }
+
+::ng-deep .segment > .segment-main > span.segment-key {
+  color: #9f58db !important;
+}

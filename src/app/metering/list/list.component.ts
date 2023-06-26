@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {
-  CheckboxComponent,
+  CheckboxComponent, DataReloadEvent,
   IdentifierTableColumn,
   TableColumn,
   TableComponent
@@ -15,10 +15,7 @@ import {MeteringService} from '../service/metering.service';
 })
 export class MeteringListComponent implements OnInit {
 
-  page = 0;
-  size = 20;
-  sortItem = 'createdDate';
-  sortOrder = 'desc';
+  currentCondition: DataReloadEvent;
 
   idColumn: TableColumn;
   columns: TableColumn[];
@@ -33,6 +30,7 @@ export class MeteringListComponent implements OnInit {
     private meteringService: MeteringService,
     private router: Router,
   ) {
+    this.currentCondition = new DataReloadEvent('updatedDate', 'asc', 0, 10);
     this.columns = [
       this.idColumn = new IdentifierTableColumn('id', '', false)
         .withHeaderCheck(true).withIgnoreSort(true)
@@ -51,39 +49,33 @@ export class MeteringListComponent implements OnInit {
     this.searchCloud();
   }
 
-  public doRefresh(event?) {
-    if (event) {
-      this.page = event.pageNumber;
-      this.size = event.pageSize;
-      this.sortOrder = event.sortOrder;
+  doRefresh(condition?: DataReloadEvent) {
+    if (condition) {
+      this.currentCondition = condition;
     } else {
-      this.pageReset();
+      condition = this.currentCondition;
     }
 
-    this.meteringService.getMeteringList(this.page, this.size, this.sortItem, this.sortOrder, this.selectCloud).subscribe((result) => {
-      console.log(result);
+    this.meteringService.getMeteringList(
+      condition.pageNumber,
+      condition.pageSize,
+      condition.active,
+      condition.sortOrder,
+      this.selectCloud).subscribe((result) => {
       this.meteringList = result.content;
-      this.list.refresh(result.totalElements, this.meteringList, this.columns, event);
+      this.list.refresh(result.totalElements, this.meteringList, this.columns, condition);
     });
-  }
-
-  public pageReset() {
-    this.page = 0;
-    this.size = 20;
-    this.sortOrder = 'desc';
-    this.sortItem = 'requestedDate';
   }
 
   goDetail($event: any) {
     const metering = $event.element.getData();
 
-    this.router.navigate(['/main', { outlets: { content: 'metering/detail/' + metering.meteringId }}]);
+    this.router.navigate(['/main', {outlets: {content: 'metering/detail/' + metering.meteringId}}]);
   }
 
   searchCloud() {
     this.meteringService.searchCloud().subscribe((result) => {
       this.cloudList = result;
-      console.log(this.cloudList);
     });
   }
 

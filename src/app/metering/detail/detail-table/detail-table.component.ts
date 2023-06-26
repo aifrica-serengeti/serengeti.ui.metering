@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, Type, ViewChild} from '@angular/core';
-import {TableColumn, TableComponent, TableDetailPage} from '@serengeti/serengeti-common';
+import {DataReloadEvent, TableColumn, TableComponent, TableDetailPage} from '@serengeti/serengeti-common';
 import {MeteringService} from '../../service/metering.service';
-import {Statistics} from '../../statistics/Statistics';
+import {Statistics} from '../../../statistics/Statistics';
 import {MeteringDetailLogComponent} from '../detail-log/detail-log.component';
 
 @Component({
@@ -11,10 +11,7 @@ import {MeteringDetailLogComponent} from '../detail-log/detail-log.component';
 })
 export class MeteringDetailTableComponent implements OnInit {
 
-  page = 0;
-  size = 10;
-  sortItem = 'requestDate';
-  sortOrder = 'asc';
+  currentCondition: DataReloadEvent;
 
   meteringLogList;
   currentMeteringLog;
@@ -28,7 +25,7 @@ export class MeteringDetailTableComponent implements OnInit {
   @Input() metering;
 
   constructor(private meteringService: MeteringService) {
-
+    this.currentCondition = new DataReloadEvent('updatedDate', 'asc', 0, 10);
     this.columns = [
       new TableColumn('state', 'metering.list.metering.state'),
       new TableColumn('cpu', 'metering.list.metering.cpu'),
@@ -43,17 +40,19 @@ export class MeteringDetailTableComponent implements OnInit {
     this.doRefresh();
   }
 
-  public doRefresh(event?: any) {
-    if (event) {
-      this.page = event.pageNumber;
-      this.size = event.pageSize;
-      this.sortOrder = event.sortOrder;
-      this.sortItem = event.active;
+  doRefresh(condition?: DataReloadEvent) {
+    if (condition) {
+      this.currentCondition = condition;
     } else {
-      this.pageReset();
+      condition = this.currentCondition;
     }
 
-    this.meteringService.getMeteringDetailList(this.page, this.size, this.sortItem, this.sortOrder, this.meteringId).subscribe((result) => {
+    this.meteringService.getMeteringDetailList(
+      condition.pageNumber,
+      condition.pageSize,
+      condition.active,
+      condition.sortOrder,
+      this.meteringId).subscribe((result) => {
       this.meteringLogList = result.content;
       for (const meteringLogEntity of result.content) {
         if (meteringLogEntity.current) {
@@ -61,7 +60,7 @@ export class MeteringDetailTableComponent implements OnInit {
           break;
         }
       }
-      this.list.refresh(result.totalElements, this.meteringLogList, this.columns, event);
+      this.list.refresh(result.totalElements, this.meteringLogList, this.columns, condition);
     });
   }
 
@@ -69,10 +68,4 @@ export class MeteringDetailTableComponent implements OnInit {
     return MeteringDetailLogComponent;
   }
 
-  public pageReset() {
-    this.page = 0;
-    this.size = 20;
-    this.sortOrder = 'desc';
-    this.sortItem = 'requestedDate';
-  }
 }

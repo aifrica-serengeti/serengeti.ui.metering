@@ -27,7 +27,6 @@ export class MeteringService {
     if (selectCloud) {
       cloudId = selectCloud.cloudId;
     }
-    console.log(cloudId);
 
     const param = new HttpParams()
       .set('page', page)
@@ -35,17 +34,6 @@ export class MeteringService {
       .set('sortItem', sortItem)
       .set('sortOrder', sortOrder)
       .set('cloudId', cloudId);
-    return this.messageService.query(url, param);
-  }
-
-  getMeteringCloudList(): Observable<any> {
-    const url = this.endPoint + 'cloud';
-
-    const param = new HttpParams()
-      .set('page', '0')
-      .set('size', '10')
-      .set('sortItem', 'createdDate')
-      .set('sortOrder', 'asc');
     return this.messageService.query(url, param);
   }
 
@@ -108,7 +96,7 @@ export class MeteringService {
   }
 
   oneCloudStatistics(cloudId, startDate, endDate) {
-    const url = this.endPoint + 'statistics/cloud';
+    const url = this.endPoint + 'statistics/reload';
 
     const params = new HttpParams()
       .set('cloudId', cloudId)
@@ -118,15 +106,17 @@ export class MeteringService {
 
   }
 
-  searchStatisticsDetail(page, size, sortItem, sortOrder, cloudId, currentDate) {
+  searchStatisticsDetail(page, size, sortItem, sortOrder, cloudId, currentDate, day) {
     const url = this.endPoint + '/statistics/metering/';
+
     const param = new HttpParams()
       .set('page', page)
       .set('size', size)
       .set('sortItem', sortItem)
       .set('sortOrder', sortOrder)
       .set('cloudId', cloudId)
-      .set('currentDate', currentDate);
+      .set('currentDate', currentDate)
+      .set('day', day);
     return this.messageService.query(url, param);
   }
 }
