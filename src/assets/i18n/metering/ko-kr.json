@@ -6,6 +6,7 @@
   },
   "metering": {
     "list": {
+      "title": "자원 통계",
       "cloud": {
         "ownerId": "관리자",
         "type": "클라우드",
@@ -25,6 +26,7 @@
       }
     },
     "detail": {
+      "title": "자원 상세보기",
       "table": {
         "title": {
           "name": "자원 이름",
@@ -38,6 +40,7 @@
       }
     },
     "statistics": {
+      "title": "통계 차트",
       "cloud": "클라우드",
       "day": "기준",
       "time": "기준",
