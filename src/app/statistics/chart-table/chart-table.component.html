@@ -1,0 +1,24 @@
+<div class="content">
+  <div class="content-button">
+    <button mat-button color="primary" (click)="excel()">엑셀 다운로드</button>
+    <button mat-button color="accent" (click)="statistice()">재 통계</button>
+  </div>
+  <div class="chart-container">
+    <canvas baseChart
+            [datasets]="chartData"
+            [labels]="chartLabels"
+            [chartType]="chartType"
+            [options]="chartOptions"
+            width="90" height="18">
+    </canvas>
+  </div>
+
+  <div class="table-container">
+    <app-table #meteringStatistics
+               (dataReload)="doSearch($event)"
+               [detailPageType]="getDetailPageType()"
+               [pagable]="true"
+               [pageSize]="15">
+    </app-table>
+  </div>
+</div>

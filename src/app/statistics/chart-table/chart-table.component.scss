@@ -1,0 +1,19 @@
+.content {
+  display: flex;
+  flex-direction: column;
+
+  .content-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+    button {
+      margin-left: 10px; /* 버튼 사이의 간격을 조정할 수 있습니다. */
+    }
+  }
+
+  .chart-container {
+    margin-bottom: 3%;
+  }
+}
