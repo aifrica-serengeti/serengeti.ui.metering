@@ -53,6 +53,10 @@ export class StatisticsDetailTableComponent implements OnInit, TableDetailPage {
       this.statistics.cloudId, this.statistics.statisticsDayTime, this.statistics.day).subscribe((result) => {
       result.content.forEach((metering) => {
         const meteringLog = new MeteringLog(metering);
+        const logEntity = metering.meteringLogEntityList.find((log) => log.current);
+        if (logEntity) {
+          meteringLog.setLogEntity(logEntity);
+        }
         this.meteringLogList.push(meteringLog);
       });
       this.list.refresh(result.totalElements, this.meteringLogList, this.columns, condition);
