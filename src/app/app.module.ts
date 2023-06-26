@@ -86,6 +86,15 @@ export function createTranslateLoader(http: HttpClient) {
     Configurations,
     ThemeService
   ],
+  exports: [
+    MeteringListComponent,
+    MeteringDetailListComponent,
+    StatisticsComponent,
+    MeteringDetailLogComponent,
+    MeteringDetailTableComponent,
+    StatisticsDetailTableComponent,
+    StatisticsChartTableComponent,
+  ],
   entryComponents: [
     StatisticsDetailTableComponent
   ],
