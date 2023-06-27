@@ -9,6 +9,8 @@ import {MeteringService} from '../metering/service/metering.service';
 })
 export class StatisticsComponent implements OnInit {
 
+  today = new Date();
+
   cloudList;
 
   startDate = null;
@@ -23,12 +25,11 @@ export class StatisticsComponent implements OnInit {
     private meteringService: MeteringService,
     private translateService: TranslateService
   ) {
-    const currentDate = new Date(); // 현재 날짜를 얻음
-    const year = currentDate.getFullYear(); // 현재 년도를 얻음
-    const month = currentDate.getMonth(); // 현재 월을 얻음
+    const year = this.today.getFullYear(); // 현재 년도를 얻음
+    const month = this.today.getMonth(); // 현재 월을 얻음
 
     this.startDate = new Date(year, month, 1);
-    this.endDate = new Date(year, month + 1, 0);
+    this.endDate = this.today;
   }
 
   ngOnInit() {
