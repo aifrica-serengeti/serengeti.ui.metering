@@ -12,7 +12,6 @@
     "packagr": "ng-packagr -p ng-package.json && cp -R src/assets/ dist/assets",
     "packagr-win": "ng-packagr -p ng-package.json && xcopy src\\assets\\ dist\\assets\\ /h /e /y /k"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "8.2.14",
     "@angular/cdk": "8.2.3",
