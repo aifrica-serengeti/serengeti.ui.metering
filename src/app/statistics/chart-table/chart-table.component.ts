@@ -2,8 +2,8 @@ import {Component, Input, OnChanges, OnInit, Type, ViewChild} from '@angular/cor
 import {DataReloadEvent, TableColumn, TableComponent, TableDetailPage} from '@serengeti/serengeti-common';
 import {ChartType} from 'chart.js';
 import {BaseChartDirective, Label} from 'ng2-charts';
-import {MeteringService} from '../../metering/service/metering.service';
 import {ExcelService} from '../excel.service/excel.service';
+import {StatisticsService} from '../service/statistics.service';
 import {Statistics} from '../Statistics';
 import {StatisticsDetailTableComponent} from '../statistics-detail-table/statistics-detail-table.component';
 import {StatisticsExcel} from '../StatisticsExcel';
@@ -69,7 +69,7 @@ export class StatisticsChartTableComponent implements OnInit, OnChanges {
     }
   };
 
-  constructor(private meteringService: MeteringService, private excelService: ExcelService) {
+  constructor(private statisticsService: StatisticsService, private excelService: ExcelService) {
     this.currentCondition = new DataReloadEvent('statisticsDay', 'desc', 0, 15);
   }
 
@@ -98,7 +98,10 @@ export class StatisticsChartTableComponent implements OnInit, OnChanges {
       condition.active = 'statisticsDay';
     }
 
-    this.meteringService.getMeteringStatistics(this.cloud.cloudId, this.formatDate(startDate), this.formatDate(endDate))
+    this.statisticsService.getMeteringStatistics(
+      this.cloud.cloudId,
+      this.statisticsService.dateFormat(startDate),
+      this.statisticsService.dateFormat(endDate))
       .subscribe((result) => {
         this.meteringOriginStatisticsList = result.slice();
         this.meteringOriginTableList = result.slice();
@@ -138,7 +141,7 @@ export class StatisticsChartTableComponent implements OnInit, OnChanges {
     let pageStartIndex = 0;
     const pageSize = (condition.pageNumber + 1) * condition.pageSize;
     if (condition.pageNumber > 0) {
-      pageStartIndex = (condition.pageNumber * condition.pageSize) + 1;
+      pageStartIndex = (condition.pageNumber * condition.pageSize);
     }
     this.list.refresh(
       this.meteringStatisticsList.length,
@@ -171,17 +174,6 @@ export class StatisticsChartTableComponent implements OnInit, OnChanges {
     return null;
   }
 
-  public formatDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-
-    return `${year}${month}${day} ${hours}:${minutes}:${seconds}`;
-  }
-
   private chartDataSetting(metering: any) {
     if (metering) {
       this.chartData[0].data.push(metering.cpu);
@@ -210,7 +202,7 @@ export class StatisticsChartTableComponent implements OnInit, OnChanges {
       statisticsExcelList.push(statisticsExcel);
     }
 
-    this.excelService.exportToExcel(statisticsExcelList, this.cloud.cloudName, this.formatDate(this.startDate));
+    this.excelService.exportToExcel(statisticsExcelList, this.cloud.cloudName, this.statisticsService.dateFormat(this.startDate));
   }
 
   getDetailPageType(): Type<TableDetailPage> {
@@ -218,7 +210,10 @@ export class StatisticsChartTableComponent implements OnInit, OnChanges {
   }
 
   statistice() {
-    this.meteringService.oneCloudStatistics(this.cloud.cloudId, this.formatDate(this.startDate), this.formatDate(this.endDate)).subscribe((result) => {
+    this.statisticsService.oneCloudStatistics(
+      this.cloud.cloudId,
+      this.statisticsService.dateFormat(this.startDate),
+      this.statisticsService.dateFormat(this.endDate)).subscribe((result) => {
       this.doSearch();
     });
   }

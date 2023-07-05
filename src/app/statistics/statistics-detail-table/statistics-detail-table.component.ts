@@ -2,7 +2,7 @@ import {Component, OnInit, Type, ViewChild} from '@angular/core';
 import {DataReloadEvent, TableColumn, TableComponent, TableDetailPage, TableElement} from '@serengeti/serengeti-common';
 import {MeteringDetailLogComponent} from '../../metering/detail/detail-log/detail-log.component';
 import {MeteringLog} from '../../metering/detail/detail-table/MeteringLog';
-import {MeteringService} from '../../metering/service/metering.service';
+import {StatisticsService} from '../service/statistics.service';
 import {Statistics} from '../Statistics';
 
 @Component({
@@ -20,7 +20,7 @@ export class StatisticsDetailTableComponent implements OnInit, TableDetailPage {
   currentCondition: DataReloadEvent;
   @ViewChild('meteringLogCurrentList', {static: true}) list: TableComponent;
 
-  constructor(private meteringService: MeteringService) {
+  constructor(private statisticsService: StatisticsService) {
     this.currentCondition = new DataReloadEvent('updatedDate', 'asc', 0, 10);
     this.columns = [
       new TableColumn('meteringName', 'metering.list.metering.name'),
@@ -45,7 +45,7 @@ export class StatisticsDetailTableComponent implements OnInit, TableDetailPage {
     }
     this.meteringLogList = [];
 
-    this.meteringService.searchStatisticsDetail(
+    this.statisticsService.searchStatisticsDetail(
       condition.pageNumber,
       condition.pageSize,
       condition.active,

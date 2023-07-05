@@ -1,6 +1,8 @@
+import {DatePipe} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {MeteringService} from '../metering/service/metering.service';
+import {StatisticsService} from './service/statistics.service';
 
 @Component({
   selector: 'lib-metering-statistics',
@@ -23,7 +25,8 @@ export class StatisticsComponent implements OnInit {
 
   constructor(
     private meteringService: MeteringService,
-    private translateService: TranslateService
+    private statisticsService: StatisticsService,
+    private translateService: TranslateService,
   ) {
     const year = this.today.getFullYear(); // 현재 년도를 얻음
     const month = this.today.getMonth(); // 현재 월을 얻음

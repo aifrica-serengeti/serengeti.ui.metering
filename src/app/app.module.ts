@@ -1,3 +1,4 @@
+import {CommonModule, DatePipe} from '@angular/common';
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
@@ -80,11 +81,13 @@ export function createTranslateLoader(http: HttpClient) {
     RouterModule,
     SerengetiCommonUIModule,
     NgxJsonViewerModule,
+    CommonModule
   ],
   providers: [
     TranslateService,
     Configurations,
-    ThemeService
+    ThemeService,
+    DatePipe
   ],
   exports: [
     MeteringListComponent,

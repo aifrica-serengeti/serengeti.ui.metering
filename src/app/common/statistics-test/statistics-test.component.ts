@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MeteringService} from '../../metering/service/metering.service';
+import {StatisticsService} from '../../statistics/service/statistics.service';
 
 @Component({
   selector: 'app-statistics-test',
@@ -14,7 +15,8 @@ export class StatisticsTestComponent implements OnInit {
   cloudList;
   selectCloud;
 
-  constructor(private meteringService: MeteringService) { }
+  constructor(private meteringService: MeteringService,
+              private statisticsService: StatisticsService) { }
 
   ngOnInit() {
     this.searchCloud();
@@ -27,7 +29,7 @@ export class StatisticsTestComponent implements OnInit {
   }
 
   currentStatistics() {
-    this.meteringService.currentStatistics().subscribe((result) => {
+    this.statisticsService.currentStatistics().subscribe((result) => {
 
     });
   }
@@ -36,7 +38,7 @@ export class StatisticsTestComponent implements OnInit {
       console.log('date null!!!');
       return;
     }
-    this.meteringService.allCloudStatistics(this.startDate, this.endDate).subscribe();
+    this.statisticsService.allCloudStatistics(this.startDate, this.endDate).subscribe();
   }
 
   oneCloudStatistics() {
@@ -45,7 +47,7 @@ export class StatisticsTestComponent implements OnInit {
       console.log('date null!!!');
       return;
     }
-    this.meteringService.oneCloudStatistics(this.selectCloud, this.startDate, this.endDate).subscribe();
+    this.statisticsService.oneCloudStatistics(this.selectCloud, this.startDate, this.endDate).subscribe();
   }
 
 }
