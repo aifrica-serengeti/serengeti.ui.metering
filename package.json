@@ -1,6 +1,6 @@
 {
   "name": "@serengeti/serengeti-metering",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publishConfig": {
     "registry": "http://183.111.79.44:8081/repository/serengeti-ui-repository"
   },
