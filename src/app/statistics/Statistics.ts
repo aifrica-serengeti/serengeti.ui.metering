@@ -1,7 +1,9 @@
 export class Statistics {
   constructor(metering, day, cloud) {
-    this.cloudId = cloud.cloudId;
-    this.cloudName = cloud.cloudName;
+    if (cloud) {
+      this.cloudId = cloud.cloudId;
+      this.cloudName = cloud.cloudName;
+    }
     this.cpu = metering.cpu;
     this.gpu = metering.gpu;
     this.memory = metering.memory;

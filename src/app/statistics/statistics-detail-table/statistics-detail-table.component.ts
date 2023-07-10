@@ -45,12 +45,14 @@ export class StatisticsDetailTableComponent implements OnInit, TableDetailPage {
     }
     this.meteringLogList = [];
 
+    const statisticsDayTime = this.statisticsService.dateFormat(new Date(this.statistics.statisticsDayTime));
+
     this.statisticsService.searchStatisticsDetail(
       condition.pageNumber,
       condition.pageSize,
       condition.active,
       condition.sortOrder,
-      this.statistics.cloudId, this.statistics.statisticsDayTime, this.statistics.day).subscribe((result) => {
+      this.statistics.cloudId, statisticsDayTime, this.statistics.day).subscribe((result) => {
       result.content.forEach((metering) => {
         const meteringLog = new MeteringLog(metering);
         const logEntity = metering.meteringLogEntityList.find((log) => log.current);

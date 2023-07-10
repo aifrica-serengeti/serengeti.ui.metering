@@ -15,10 +15,10 @@ import {StatisticsExcel} from '../StatisticsExcel';
 })
 export class StatisticsChartTableComponent implements OnInit, OnChanges {
 
-  @Input() cloud;
+  @Input() cloud = null;
   @Input() startDate: Date;
   @Input() endDate: Date;
-  day;
+  day = false;
 
   meteringOriginStatisticsList = [];
   meteringStatisticsList: Statistics[] = [];
@@ -74,11 +74,53 @@ export class StatisticsChartTableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.doSearch();
+    if (this.cloud) {
+      this.doSearch();
+    } else {
+      this.doSearchSummary();
+    }
   }
 
   ngOnChanges(changes): void {
-    this.doSearch();
+    if (this.cloud) {
+      this.doSearch();
+    } else {
+      this.doSearchSummary();
+    }
+  }
+
+  public doSearchSummary() {
+    const startDate = new Date(this.startDate.getTime());
+    const endDate = new Date(this.endDate.getTime());
+    this.statisticsService.searchSummary(this.statisticsService.dateFormat(this.startDate), this.statisticsService.dateFormat(this.endDate))
+      .subscribe((result) => {
+        this.columns = [
+          new TableColumn('statisticsDayTime', 'metering.statistics.time'),
+          new TableColumn('cpu', 'metering.statistics.cpu'),
+          new TableColumn('gpu', 'metering.statistics.gpu'),
+          new TableColumn('memory', 'metering.statistics.memory'),
+          new TableColumn('disk', 'metering.statistics.disk')
+        ];
+
+        this.meteringOriginStatisticsList = result.slice();
+        this.meteringOriginTableList = result.slice();
+        this.chartLabels = [];
+        this.chartData.forEach((data) => {
+          data.data = [];
+        });
+        this.meteringStatisticsList = [];
+        this.statisticsSetting(result);
+
+        while (startDate <= endDate) {
+          const dateString = startDate.toLocaleDateString();
+          this.chartLabels.push(dateString);
+          startDate.setDate(startDate.getDate() + 1);
+          const metering = this.selectStatisticsOfCurrentDate(dateString, result);
+          this.chartDataSetting(metering);
+        }
+        this.columns[0] = new TableColumn('statisticsDay', 'metering.statistics.day');
+        this.tablePaging(this.currentCondition);
+      });
   }
 
   public doSearch(condition?: DataReloadEvent) {
@@ -206,7 +248,11 @@ export class StatisticsChartTableComponent implements OnInit, OnChanges {
   }
 
   getDetailPageType(): Type<TableDetailPage> {
-    return StatisticsDetailTableComponent;
+    if (this.cloud) {
+      return StatisticsDetailTableComponent;
+    } else {
+      return ;
+    }
   }
 
   statistice() {

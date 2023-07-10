@@ -22,6 +22,10 @@
   </div>
 
   <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="summay">
+      <lib-statistics-chart-table [cloud]="null" [startDate]="transferStartDate" [endDate]="transferEndDate"></lib-statistics-chart-table>
+    </mat-tab>
+
     <ng-container *ngFor="let cloud of selectedCloud">
       <mat-tab label={{cloud.cloudName}}>
         <lib-statistics-chart-table [cloud]="cloud" [startDate]="transferStartDate" [endDate]="transferEndDate"></lib-statistics-chart-table>

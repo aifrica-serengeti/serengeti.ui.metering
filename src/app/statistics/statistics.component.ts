@@ -16,8 +16,8 @@ export class StatisticsComponent implements OnInit {
   cloudList;
 
   startDate = null;
-  transferStartDate = null;
   endDate = null;
+  transferStartDate = null;
   transferEndDate = null;
 
   selectCloud = null;
@@ -33,6 +33,8 @@ export class StatisticsComponent implements OnInit {
 
     this.startDate = new Date(year, month, 1);
     this.endDate = this.today;
+    this.transferStartDate = this.startDate;
+    this.transferEndDate = this.endDate;
   }
 
   ngOnInit() {
